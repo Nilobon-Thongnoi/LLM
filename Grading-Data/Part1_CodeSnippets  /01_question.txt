@@ -1,0 +1,160 @@
+
+PART 1: CODE SNIPPETS
+LANGUAGE: JavaScript
+TOTAL SCORE: 50
+NUMBER OF QUESTIONS: 10
+SCORE PER QUESTION: 5
+
+SOURCE:
+QualifyExam_answerKey(2).pdf, pages 1-4
+
+ORIGINAL INSTRUCTION:
+จากตัวอย่างส่วนของโปรแกรม (Code snippets) ด้านล่าง
+จงเขียนผลลัพธ์ที่เกิดขึ้น เมื่อส่วนของโปรแกรม
+ดังกล่าวถูกประมวลผล
+
+----------------------------------------
+QUESTION CS-01 (5 POINTS)
+----------------------------------------
+
+let isRaining = false;
+let hasUmbrella = true;
+
+if (isRaining && !hasUmbrella) {
+    console.log("You will get wet");
+} else {
+    console.log("You are safe");
+}
+
+----------------------------------------
+QUESTION CS-02 (5 POINTS)
+----------------------------------------
+
+let car = {
+    brand: "Toyota",
+    year: 2020
+};
+
+console.log(car.brand);
+console.log(car["year"]);
+
+----------------------------------------
+QUESTION CS-03 (5 POINTS)
+----------------------------------------
+
+let a = 10;
+let b = 5;
+
+if (a > b) {
+    if (a % 2 === 0)
+        console.log("A is even and greater");
+    else
+        console.log("A is odd and greater");
+} else {
+    console.log("B is greater or equal");
+}
+
+----------------------------------------
+QUESTION CS-04 (5 POINTS)
+----------------------------------------
+
+let arr = [5, 10, 151];
+
+for (let i = arr.length - 1; i >= 0; i--)
+    console.log(arr[i]);
+
+----------------------------------------
+QUESTION CS-05 (5 POINTS)
+----------------------------------------
+
+let num = 1;
+
+switch (num) {
+    case 0:
+        console.log("Apple");
+    case 1:
+        console.log("Banana");
+    case 2:
+        console.log("Orange");
+    default:
+        console.log("Other");
+}
+
+----------------------------------------
+QUESTION CS-06 (5 POINTS)
+----------------------------------------
+
+let i = 0;
+
+while (i < 10) {
+    if (i % 2 == 0)
+        console.log("Loop: " + i);
+    i++;
+}
+
+----------------------------------------
+QUESTION CS-07 (5 POINTS)
+----------------------------------------
+
+function loopTillTen() {
+    let num = 0;
+    let sum = 0;
+
+    while (num <= 10) {
+        sum += num;
+        num += 2;
+    }
+
+    return sum;
+}
+
+console.log(loopTillTen());
+
+----------------------------------------
+QUESTION CS-08 (5 POINTS)
+----------------------------------------
+
+for (let i = 1; i <= 2; i++) {
+    for (let j = 2; j <= 3; j++) {
+        console.log("i=" + i + ", j=" + j);
+    }
+}
+
+----------------------------------------
+QUESTION CS-09 (5 POINTS)
+----------------------------------------
+
+let key = "level";
+
+let game = {
+    name: "Maze Runner",
+    key: "Sword",
+    level: 3
+};
+
+console.log(game["name"]);
+console.log(game[key]);
+
+----------------------------------------
+QUESTION CS-10 (5 POINTS)
+----------------------------------------
+
+let words = ["apple", "banana", "fig", "pear"];
+
+for (let i = 0; i < words.length; i++) {
+    if (words[i].length > 4) {
+        console.log(words[i] + " is long");
+        break;
+    }
+}
+
+----------------------------------------
+IMPORTANT NOTES
+----------------------------------------
+
+- All snippets use JavaScript.
+- Students must provide the program outputs.
+- Each question is worth 5 points.
+- The order and content of printed lines matter.
+- The question does not explicitly require explanations.
+- Do not require written explanations for full credit.

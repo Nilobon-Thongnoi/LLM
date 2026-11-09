@@ -1,0 +1,103 @@
+PART 3: ALGORITHM
+QUESTION ID: ALG-01
+TOTAL SCORE: 25
+
+RUBRIC STATUS:
+PROPOSED - NOT OFFICIALLY APPROVED
+Must be reviewed by the teacher or project team.
+
+GENERAL GRADING RULES:
+1. Grade each criterion independently.
+2. Award partial credit when a criterion is partly satisfied.
+3. Do not require the student's answer to match the reference wording.
+4. Accept alternative valid algorithms and data structures.
+5. Judge the complexity according to the student's chosen algorithm.
+6. Give reasons for awarded and deducted points.
+7. Do not award points for unrelated or unsupported claims.
+8. Never exceed the maximum score.
+
+---------------------------------
+QUESTION A: 10 POINTS
+---------------------------------
+
+A1. Appropriate Data Structures (3 points)
+
+3: Defines suitable structures for diseases, symptoms and their relationships, and explains their use clearly.
+2: Selects suitable structures but omits some details or explanations.
+1: Identifies a relevant structure without showing adequately how data is organized.
+0: No valid or relevant data structure.
+
+A2. Search Algorithm (4 points)
+
+4: Explains a logically valid process to match patient symptoms with diseases, including how matches are counted or evaluated.
+3: The process is mostly correct but missing minor details.
+2: The main matching idea is reasonable but several steps are unclear.
+1: Gives only a vague search idea with little usable logic.
+0: No valid search process.
+
+A3. Top 3 Ranking (3 points)
+
+3: Defines a ranking method consistent with the chosen matching approach and explains selecting the top 3 diseases.
+2: Ranking is mostly correct but omits an important detail.
+1: Mentions returning 3 diseases without a clear selection rule.
+0: Does not provide a usable ranking or selection method.
+
+---------------------------------
+QUESTION B: 10 POINTS
+---------------------------------
+
+B1. Variables (2 points)
+
+2: Defines N and M correctly according to the question.
+1: Defines only one variable correctly or gives incomplete definitions.
+0: Incorrect or missing definitions.
+
+B2. Time Complexity Analysis (4 points)
+
+4: Analyzes the relevant search operations, loops and data structure costs correctly for the proposed algorithm.
+3: Mostly correct with a minor omission.
+2: Partially correct reasoning but misses important operations.
+1: Shows minimal relevant analysis.
+0: No valid analysis.
+
+B3. Final Big-O and Explanation (4 points)
+
+4: States a correct worst-case bound, justified by the selected algorithm and its assumptions.
+3: Correct bound with incomplete justification.
+2: A partially justified bound with a significant error or missing cost.
+1: Gives an unsupported or mostly incorrect bound with limited relevant reasoning.
+0: No valid result or explanation.
+
+Important:
+O(N*M) is not the only acceptable answer.
+The result depends on the algorithm, preprocessing and data structure assumptions.
+Do not assume average-case hash lookup is worst-case O(1) without stating the assumption or using an appropriate worst-case guarantee.
+
+---------------------------------
+QUESTION C: 5 POINTS
+---------------------------------
+
+C1. First Limitation and Improvement (2 points)
+
+2: Identifies a relevant practical limitation and a suitable improvement.
+1: Identifies the limitation but provides an incomplete or weak improvement, or vice versa with partial relevance.
+0: No relevant limitation and improvement.
+
+C2. Second Limitation and Improvement (2 points)
+
+2: Identifies a different relevant limitation and a suitable improvement.
+1: Partially correct limitation or improvement.
+0: Missing or incorrect.
+
+C3. Justification (1 point)
+
+1: Explains logically how the proposed improvements address the limitations.
+0: No meaningful explanation.
+
+---------------------------------
+MAXIMUM TOTAL: 25 POINTS
+---------------------------------
+
+RUBRIC NOTE:
+This rubric is a draft for LLM evaluation.
+It is not an official teacher rubric.

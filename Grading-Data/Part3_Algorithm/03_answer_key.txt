@@ -1,0 +1,101 @@
+PART 3: ALGORITHM
+QUESTION ID: ALG-01
+
+REFERENCE ANSWER STATUS:
+PROPOSED - NOT OFFICIALLY APPROVED
+
+QUESTION A: DATA STRUCTURES AND SEARCH
+
+Suggested solution:
+Use an inverted index together with disease records.
+
+Disease records:
+Store each disease ID and its associated symptoms.
+
+Inverted index:
+Map each symptom to the diseases associated with it.
+
+Example (illustrative only):
+Fever -> Disease A, Disease B, Disease D
+Cough -> Disease A, Disease C, Disease D
+Fatigue -> Disease A, Disease C
+
+Search steps:
+1. Receive the patient's symptoms.
+2. Remove duplicated symptoms if necessary.
+3. Find candidate diseases associated with each symptom.
+4. Count or calculate matching scores for each disease.
+5. Rank diseases by their matching scores.
+6. Return the top 3 matching diseases.
+7. Apply a consistent tie-breaking rule when needed.
+
+Alternative valid approaches:
+- Array-based searching
+- Set intersection or matching
+- Hash Map
+- Bitset representation
+- Weighted matching
+- Other logically valid approaches
+
+The student must explain how the selected method works.
+
+QUESTION B: TIME COMPLEXITY
+
+N = total number of diseases
+M = number of reported patient symptoms
+
+Example method:
+Use a prebuilt inverted index to retrieve matching diseases.
+For each reported symptom, examine its associated diseases.
+
+In the worst case, each of the M symptoms may be associated with all N diseases.
+
+Matching work:
+O(N*M)
+
+Selecting the top 3 without sorting all diseases:
+O(N)
+
+Total:
+O(N*M + N + M) = O(N*M)
+for positive N and M.
+
+Assumptions:
+- The inverted index has already been built.
+- Hash-based indexing is assumed to have O(1) average lookup.
+- The calculation above is a conditional worst-case bound on the number of matching entries processed, not an unconditional deterministic worst-case guarantee for hash-table operations.
+- Preprocessing and full sorting, if used, must be included in the analysis.
+
+Alternative:
+Sorting all N disease scores may add O(N log N).
+
+A different algorithm may have a different valid complexity.
+Evaluate the student's own algorithm.
+
+QUESTION C: LIMITATIONS AND IMPROVEMENTS
+
+Limitation 1:
+Symptoms may overlap among several diseases.
+Simple matching counts may not identify the most clinically relevant disease.
+
+Improvement:
+Apply weighted symptom matching or clinically justified relevance scores.
+
+Limitation 2:
+Growing disease and symptom data may increase storage, preprocessing and search costs.
+
+Improvement:
+Use indexing and incremental updates instead of repeatedly rebuilding all data.
+
+Other acceptable limitations:
+- Missing patient symptoms
+- Inaccurate symptom reports
+- Changing disease knowledge
+- Rare diseases with insufficient reference data
+- Clinically important symptoms not represented by simple counts
+
+GRADING GUIDANCE:
+The reference answer is an example, not an exact-match template.
+Award points using the approved rubric.
+Accept alternative technically valid answers.
+Do not treat the algorithm's ranking as a medical diagnosis.

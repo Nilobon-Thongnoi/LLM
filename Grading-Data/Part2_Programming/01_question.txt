@@ -1,0 +1,35 @@
+PART 2: PROGRAMMING
+QUESTION ID: PROG-01
+LANGUAGE: JavaScript ONLY
+MAXIMUM SCORE: 20
+SOURCE: QualifyExam_answerKey(2).pdf, page 4
+STATUS: Original Exam Question
+
+II. (20 คะแนน) จงสร้างฟังก์ชันเพื่อคำนวณอัตราภาษีรถยนต์นั่งส่วนบุคคลรายปี โดยวิธีการคำนวณภาษีดังกล่าวมีดังต่อไปนี้
+
+อัตราภาษีจะคำนวณอ้างอิงจากขนาดความจุของกระบอกสูบ (CC)
+
+- ตั้งแต่ 1-600 cc คิดอัตราภาษี cc ละ 0.5 บาท
+- ตั้งแต่ 601-1,800 cc คิดอัตราภาษี cc ละ 1.5 บาท
+- ตั้งแต่ 1,801 cc ขึ้นไป คิดอัตราภาษี cc ละ 4 บาท
+
+ตัวอย่างการคำนวณภาษีรถยนต์ Toyota Camry รุ่น 2.0 cc (2000 cc)
+
+- 600 cc แรก อัตราภาษี -> 600 x 0.5 = 300 บาท
+- 601-1,800 cc อัตราภาษี -> (1,800 - 600) x 1.5 = 1,800 บาท
+- ส่วนเกินจาก 1,800 cc อัตราภาษี -> (2,000 - 1,800) x 4 = 800 บาท
+
+รวมอัตราภาษีที่ต้องจ่ายรายปี เท่ากับ 300 + 1,800 + 800 = 2,900 บาท
+
+เงื่อนไขในการสร้างฟังก์ชัน ได้แก่
+
+- จำเป็นต้องรับพารามิเตอร์ ได้แก่ ค่าความจุของกระบอกสูบรถยนต์ (CC)
+- ผลลัพธ์ที่ได้จากฟังก์ชัน คือ จำนวนเงินภาษี ซึ่งมีชนิดข้อมูลเป็นเลขจำนวนเต็ม (Integer)
+
+PROJECT LANGUAGE REQUIREMENT:
+JavaScript ONLY.
+
+NOTES:
+- Preserve the original tax rules and maximum score.
+- Do not replace the question with another programming task.
+- Award partial credit according to the teacher's rubric.

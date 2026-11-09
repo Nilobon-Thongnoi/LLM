@@ -1,0 +1,43 @@
+PART 4: ER DIAGRAM
+QUESTION ID: ER-01
+
+HINT STATUS:
+PROPOSED - OPTIONAL
+
+Use only if the teacher enables AI hints
+for this ER Diagram question.
+
+HINT LEVEL 1:
+
+Start by identifying the main information
+the company needs to store. Think about
+which concepts should become database tables.
+
+HINT LEVEL 2:
+
+Consider how employees, departments and
+offices are connected. Check whether
+each relationship involves one or
+multiple records on either side.
+
+HINT LEVEL 3:
+
+Review whether your tables contain suitable
+identifiers, attributes and data types.
+Then examine whether the relationships
+and cardinalities can represent all
+the requirements in the question.
+
+========================================
+HINT RULES
+========================================
+
+1. Do not reveal the complete ER Diagram.
+2. Do not list all required tables as a solution.
+3. Do not provide a complete reference schema.
+4. Do not reveal rubric scores.
+5. Do not repeat previous hints.
+6. Give only one hint at the requested level.
+7. Use English for student-facing hints.
+8. Only generate hints when enabled by
+   the teacher for that question.

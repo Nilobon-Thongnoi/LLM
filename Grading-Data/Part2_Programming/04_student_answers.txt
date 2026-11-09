@@ -1,0 +1,226 @@
+PART 2: PROGRAMMING
+QUESTION ID: PROG-01
+LANGUAGE: JavaScript ONLY
+MAXIMUM SCORE: 20
+
+DATA TYPE: Synthetic student answers
+SCORE STATUS: Proposed expected scores
+NOT OFFICIAL TEACHER GRADES
+
+OFFICIAL RUBRIC:
+R1 Function and Parameter: 4
+R2 Conditional Logic: 6
+R3 Tax Calculation: 6
+R4 Display or Return: 2
+R5 Integer Conversion: 2
+
+========================================
+CASE P01: FULLY CORRECT
+========================================
+
+STUDENT ANSWER:
+
+function calculateTax(cc) {
+    let tax = 0;
+
+    if (cc <= 600) {
+        tax = cc * 0.5;
+    } else if (cc <= 1800) {
+        tax = 300 + (cc - 600) * 1.5;
+    } else {
+        tax = 2100 + (cc - 1800) * 4;
+    }
+
+    return Math.trunc(tax);
+}
+
+EXPECTED SCORES:
+R1 = 4/4
+R2 = 6/6
+R3 = 6/6
+R4 = 2/2
+R5 = 2/2
+
+TOTAL = 20/20
+
+REASON:
+มีฟังก์ชันและพารามิเตอร์ถูกต้อง เงื่อนไขครบทุกช่วง คำนวณภาษีแบบขั้นบันไดถูกต้อง คืนผลลัพธ์และแปลงเป็นจำนวนเต็มได้
+
+========================================
+CASE P02: MOSTLY CORRECT
+========================================
+
+STUDENT ANSWER:
+
+function calculateTax(cc) {
+    let tax = 0;
+
+    if (cc <= 600) {
+        tax = cc * 0.5;
+    } else if (cc <= 1800) {
+        tax = 300 + (cc - 600) * 1.5;
+    } else {
+        tax = 2100 + (cc - 1800) * 4;
+    }
+
+    return tax;
+}
+
+EXPECTED SCORES:
+R1 = 4/4
+R2 = 6/6
+R3 = 6/6
+R4 = 2/2
+R5 = 0/2
+
+TOTAL = 18/20
+
+REASON:
+คำนวณภาษีถูกต้องและคืนค่าได้ แต่ไม่ได้จัดการให้ผลลัพธ์เป็นจำนวนเต็มตามที่โจทย์กำหนด สำหรับค่าที่คำนวณแล้วเป็นจำนวนเต็มอยู่แล้ว โค้ดยังให้ผลถูกต้อง
+
+REVIEW NOTE:
+The teacher should confirm whether integer-valued results without explicit conversion earn R5 credit.
+
+========================================
+CASE P03: APPROXIMATELY HALF CORRECT
+========================================
+
+STUDENT ANSWER:
+
+function calculateTax(cc) {
+    let tax = 0;
+
+    if (cc <= 600) {
+        tax = cc * 0.5;
+    } else if (cc <= 1800) {
+        tax = cc * 1.5;
+    } else {
+        tax = cc * 4;
+    }
+
+    return Math.trunc(tax);
+}
+
+EXPECTED SCORES:
+R1 = 4/4
+R2 = 6/6
+R3 = 2/6
+R4 = 2/2
+R5 = 2/2
+
+TOTAL = 16/20
+
+REASON:
+โครงสร้างและเงื่อนไขครบทั้งหมด แต่คำนวณภาษีผิดในช่วงที่ 2 และ 3 เพราะคิดอัตราเดียวกับความจุทั้งหมด แทนการคิดแบบขั้นบันได
+
+REVIEW NOTE:
+This is a deliberate boundary case: despite incorrect calculations in two tiers, the official rubric assigns substantial points to function, conditions and output. Do not force the total to be near 10 merely because the case category is "partially correct".
+
+========================================
+CASE P04: ONE CRITERION ONLY
+========================================
+
+STUDENT ANSWER:
+
+function calculateTax(cc) {
+    let tax = 0;
+}
+
+EXPECTED SCORES:
+R1 = 4/4
+R2 = 0/6
+R3 = 0/6
+R4 = 0/2
+R5 = 0/2
+
+TOTAL = 4/20
+
+REASON:
+ประกาศฟังก์ชันและรับพารามิเตอร์ cc ได้ แต่ยังไม่มีเงื่อนไข การคำนวณ ผลลัพธ์ และการแปลงชนิดข้อมูล
+
+========================================
+CASE P05: CORRECT IDEA, WRONG RESULT
+========================================
+
+STUDENT ANSWER:
+
+function calculateTax(cc) {
+    let tax = 0;
+
+    if (cc <= 600) {
+        tax = cc * 0.5;
+    } else if (cc <= 1800) {
+        tax = 300 + (cc - 600) * 1.5;
+    } else {
+        tax = 2100 + (cc - 1800) * 1.5;
+    }
+
+    return Math.trunc(tax);
+}
+
+EXPECTED SCORES:
+R1 = 4/4
+R2 = 6/6
+R3 = 4/6
+R4 = 2/2
+R5 = 2/2
+
+TOTAL = 18/20
+
+REASON:
+โครงสร้างทั้งหมดถูกต้องและคำนวณช่วงที่ 1 กับ 2 ได้ถูกต้อง แต่ช่วงที่ 3 ใช้อัตรา 1.5 แทน 4 จึงเสียคะแนนเฉพาะการคำนวณช่วงที่ 3
+
+========================================
+CASE P06: COMPLETELY INCORRECT
+========================================
+
+STUDENT ANSWER:
+
+let carCC = 2000;
+let tax = carCC + 100;
+console.log("Hello");
+
+EXPECTED SCORES:
+R1 = 0/4
+R2 = 0/6
+R3 = 0/6
+R4 = 0/2
+R5 = 0/2
+
+TOTAL = 0/20
+
+REASON:
+ไม่มีฟังก์ชันหรือพารามิเตอร์ ไม่ได้คำนวณตามช่วงภาษี และ console.log ไม่ได้แสดงผลภาษีที่คำนวณได้
+
+========================================
+CASE P07: NO ANSWER
+========================================
+
+STUDENT ANSWER:
+[EMPTY]
+
+EXPECTED SCORES:
+R1 = 0/4
+R2 = 0/6
+R3 = 0/6
+R4 = 0/2
+R5 = 0/2
+
+TOTAL = 0/20
+
+REASON:
+No answer submitted.
+
+========================================
+EVALUATION INSTRUCTIONS
+========================================
+
+1. All seven cases use JavaScript or an empty answer.
+2. Expected scores are provisional.
+3. Confirm the R5 integer-conversion policy with the teacher.
+4. Do not send EXPECTED SCORES to the grading model.
+5. Grade each rubric criterion independently.
+6. Compare model scores with expected scores afterward.
+7. Record differences and review questionable cases.
+8. Do not force scores into predetermined levels.
+9. Evaluate alternative valid JavaScript solutions fairly.

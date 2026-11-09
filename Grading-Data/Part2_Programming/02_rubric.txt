@@ -1,0 +1,120 @@
+PART 2: PROGRAMMING
+QUESTION ID: PROG-01
+LANGUAGE: JavaScript ONLY
+TOTAL SCORE: 20
+
+RUBRIC SOURCE:
+Official teacher rubric from QualifyExam_answerKey(2).pdf, page 5.
+
+IMPORTANT:
+The five main criteria and their scores are from the teacher.
+The detailed partial-credit rules below are proposed
+interpretations for AI grading and require teacher/team approval.
+
+========================================
+R1: FUNCTION AND PARAMETER (4 POINTS)
+========================================
+
+R1.1 Function declaration: 2 points
+2: Defines a valid JavaScript function or equivalent callable function expression.
+1: Attempts to define a function but has a minor structural or syntax error.
+0: No identifiable function.
+
+R1.2 Parameter: 2 points
+2: Accepts the car engine capacity (CC) through a parameter and uses it appropriately.
+1: Declares the parameter but does not use it correctly.
+0: No appropriate parameter.
+
+========================================
+R2: CONDITIONAL LOGIC (6 POINTS)
+========================================
+
+R2.1 First range (1-600 cc): 2 points
+2: Correctly handles the first tax range.
+1: Partially correct range condition or logic.
+0: Incorrect or missing.
+
+R2.2 Second range (601-1800 cc): 2 points
+2: Correctly handles the second tax range.
+1: Partially correct condition or boundary.
+0: Incorrect or missing.
+
+R2.3 Third range (1801 cc and above): 2 points
+2: Correctly handles the third tax range.
+1: Partially correct condition or boundary.
+0: Incorrect or missing.
+
+Accept if/else, valid switch statements or
+equivalent JavaScript conditional logic.
+
+========================================
+R3: CORRECT TAX CALCULATION (6 POINTS)
+========================================
+
+R3.1 First range: 2 points
+2: Calculates tax using 0.5 per CC within the first 600 CC.
+1: Partially correct calculation.
+0: Incorrect or missing.
+
+R3.2 Second range: 2 points
+2: Includes the first 600 CC tax and calculates the remaining capacity up to 1800 CC at 1.5 per CC.
+1: Partially correct, such as missing a component.
+0: Incorrect or missing.
+
+R3.3 Third range: 2 points
+2: Includes 300 for the first tier, 1800 for the second tier, and charges excess over 1800 CC at 4 per CC.
+1: Partially correct calculation.
+0: Incorrect or missing.
+
+========================================
+R4: OUTPUT (2 POINTS)
+========================================
+
+2: Displays or returns the calculated tax.
+1: Attempts to output the value, but the output operation is incomplete or contains a minor error.
+0: No appropriate output.
+
+Teacher's official criterion accepts display/return.
+
+========================================
+R5: INTEGER CONVERSION (2 POINTS)
+========================================
+
+2: Ensures the tax result is represented as an integer using appropriate JavaScript logic.
+1: Attempts integer conversion but does not do so correctly.
+0: No conversion or integer-result handling.
+
+========================================
+GENERAL GRADING RULES
+========================================
+
+1. Evaluate JavaScript only.
+2. Use the five official teacher criteria.
+3. Award partial credit for demonstrated correct work.
+4. Do not use exact text matching.
+5. Accept valid JavaScript alternatives.
+6. Do not require the exact function name "taxCalculate".
+7. Do not require exactly the same variable names.
+8. Do not require if/else if an equivalent method is correct.
+9. Do not give full calculation credit for applying only one rate to all CC.
+10. Identify syntax errors and consider their effect on each criterion.
+11. Do not automatically give zero for one syntax error.
+12. Do not award the same criterion twice.
+13. An empty answer receives zero.
+14. Give a reason for each criterion score.
+15. Never exceed the maximum score.
+
+LANGUAGE POLICY:
+If the student submits a different programming language,
+flag the answer for human review.
+Do not automatically give full credit for correct logic
+written in a non-JavaScript language.
+
+SCORING:
+R1 = 4
+R2 = 6
+R3 = 6
+R4 = 2
+R5 = 2
+
+MAXIMUM TOTAL = 20

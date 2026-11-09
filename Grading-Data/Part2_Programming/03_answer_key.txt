@@ -1,0 +1,147 @@
+PART 2: PROGRAMMING
+QUESTION ID: PROG-01
+LANGUAGE: JavaScript ONLY
+
+REFERENCE ANSWER STATUS:
+Validated JavaScript approach proposed for LLM testing.
+Not a replacement for the teacher's original document.
+
+========================================
+REFERENCE SOLUTION 1: IF / ELSE
+========================================
+
+function taxCalculate(carCC) {
+    let totalTax = 0;
+
+    if (carCC <= 600) {
+        totalTax = carCC * 0.5;
+    } else if (carCC <= 1800) {
+        totalTax = 300 + (carCC - 600) * 1.5;
+    } else {
+        totalTax = 300 + 1800 + (carCC - 1800) * 4;
+    }
+
+    return Math.trunc(totalTax);
+}
+
+console.log(taxCalculate(2000));
+
+EXPECTED OUTPUT:
+2900
+
+========================================
+REFERENCE SOLUTION 2: SWITCH (TRUE)
+========================================
+
+function calculateTax(cc) {
+    let tax = 0;
+
+    switch (true) {
+        case cc <= 600:
+            tax = cc * 0.5;
+            break;
+
+        case cc <= 1800:
+            tax = 300 + (cc - 600) * 1.5;
+            break;
+
+        default:
+            tax = 2100 + (cc - 1800) * 4;
+    }
+
+    return Math.trunc(tax);
+}
+
+console.log(calculateTax(2000));
+
+EXPECTED OUTPUT:
+2900
+
+========================================
+EXPLANATION
+========================================
+
+The tax uses progressive tiers.
+
+Tier 1:
+The first 600 CC are charged at 0.5 per CC.
+
+Tier 2:
+The capacity between 601 and 1800 CC is charged
+at 1.5 per CC, plus the tax for the first tier.
+
+Tier 3:
+The capacity above 1800 CC is charged at 4 per CC,
+plus 300 + 1800 from the previous tiers.
+
+The function accepts engine capacity as a parameter.
+The result is converted to an integer.
+
+========================================
+IMPORTANT GRADING NOTES
+========================================
+
+1. Accept any correct JavaScript solution.
+2. Function names and variable names can differ.
+3. Valid approaches may use if/else, switch(true),
+   arithmetic helpers or other equivalent logic.
+4. The original PDF also shows a console.log-based
+   answer. The official rubric accepts display/return.
+5. Do not require return exclusively when grading
+   against the current teacher rubric.
+6. Do not require Math.trunc specifically.
+7. Math.floor, parseInt and other conversion methods
+   must be evaluated according to their actual behavior.
+8. JavaScript Number is the usual numeric type here;
+   "Integer" refers to an integer-valued result.
+9. Do not mistake a correct progressive calculation
+   for a single-rate calculation.
+
+========================================
+TEST CASES
+========================================
+
+Input: 100
+Expected: 50
+
+Input: 600
+Expected: 300
+
+Input: 601
+Expected: 301
+
+Input: 1000
+Expected: 900
+
+Input: 1800
+Expected: 2100
+
+Input: 1801
+Expected: 2104
+
+Input: 2000
+Expected: 2900
+
+Input: 2500
+Expected: 4900
+
+Input: 3000
+Expected: 6900
+
+========================================
+ASSUMPTIONS REQUIRING REVIEW
+========================================
+
+The original question does not specify behavior for:
+- Negative CC
+- Zero CC
+- Non-numeric input
+- Non-integer CC
+
+The test cases above use positive integer CC.
+
+For fractional tax amounts, this reference uses
+Math.trunc to produce an integer.
+
+The exact integer conversion/rounding policy should
+be confirmed with the teacher.

@@ -1,0 +1,66 @@
+PART 3: ALGORITHM
+QUESTION ID: ALG-01
+
+HINT STATUS:
+PROPOSED - FOR LLM TESTING
+
+GENERAL RULES:
+- Maximum 3 hint levels per subquestion.
+- Do not provide final answers.
+- Do not provide complete algorithms or pseudocode solutions.
+- Each level should become more specific.
+- Do not repeat earlier hints.
+- Generate hints according to the student's current progress when available.
+
+====================================
+QUESTION A: DATA STRUCTURE AND SEARCH
+====================================
+
+HINT 1:
+ลองพิจารณาว่าจะเก็บข้อมูลความสัมพันธ์ระหว่างอาการกับโรคอย่างไร เพื่อให้ค้นหาโรคที่เกี่ยวข้องกับอาการของผู้ป่วยได้สะดวก
+
+HINT 2:
+ถ้าอาการหนึ่งพบได้ในหลายโรค โครงสร้างข้อมูลของคุณจะช่วยค้นหาโรคทั้งหมดที่เกี่ยวข้องกับอาการนั้นได้อย่างไร
+
+HINT 3:
+เมื่อได้รายชื่อโรคที่เกี่ยวข้องแล้ว ลองคิดว่าจะวัดความตรงกันของอาการและเปรียบเทียบโรคแต่ละโรคอย่างไร เพื่อให้ได้ผลลัพธ์ตามจำนวนที่โจทย์ต้องการ
+
+====================================
+QUESTION B: TIME COMPLEXITY
+====================================
+
+HINT 1:
+ลองแยกขั้นตอนการทำงานของอัลกอริทึมที่คุณออกแบบ แล้วพิจารณาว่าขั้นตอนใดใช้เวลามากที่สุด
+
+HINT 2:
+พิจารณาว่า N และ M แทนข้อมูลใด และขั้นตอนค้นหาของคุณต้องทำงานกี่ครั้งในกรณีที่เลวร้ายที่สุด
+
+HINT 3:
+ลองตรวจสอบว่าการค้นหา การนับคะแนน และการเลือกอันดับมีต้นทุนเท่าใด แล้วนำมาพิจารณาร่วมกันก่อนสรุป Big O
+
+====================================
+QUESTION C: LIMITATIONS
+====================================
+
+HINT 1:
+ลองนึกถึงปัญหาที่อาจเกิดขึ้นหากนำอัลกอริทึมนี้ไปใช้กับข้อมูลผู้ป่วยและฐานข้อมูลโรคจริง
+
+HINT 2:
+พิจารณาทั้งด้านปริมาณข้อมูลที่เปลี่ยนแปลง และด้านความถูกต้องหรือความคล้ายคลึงกันของอาการ
+
+HINT 3:
+เมื่อเลือกข้อจำกัดได้แล้ว ลองอธิบายว่าข้อจำกัดนั้นส่งผลต่อระบบอย่างไร และควรปรับขั้นตอนใดของอัลกอริทึมเพื่อลดปัญหา
+
+====================================
+NOTES FOR HINT GENERATION
+====================================
+
+Do not expose:
+- Reference answers
+- Rubric scores
+- Expected grading scores
+- Final Big-O expressions
+- Complete search algorithms
+- Exact final rankings
+
+Hints should support learning without solving the exam.

@@ -1,0 +1,148 @@
+PART 1: CODE SNIPPETS
+LANGUAGE: JavaScript
+SOURCE: Teacher answer key, PDF pages 1-4
+TOTAL SCORE: 50
+
+========================================
+CS-01
+========================================
+
+EXPECTED OUTPUT:
+You are safe
+
+EXPLANATION:
+isRaining is false, so the if condition is false.
+The else block executes.
+
+========================================
+CS-02
+========================================
+
+EXPECTED OUTPUT:
+Toyota
+2020
+
+EXPLANATION:
+car.brand accesses the brand property.
+car["year"] accesses the year property.
+
+========================================
+CS-03
+========================================
+
+EXPECTED OUTPUT:
+A is even and greater
+
+EXPLANATION:
+10 > 5 is true.
+10 % 2 === 0 is also true.
+The first nested if branch executes.
+
+========================================
+CS-04
+========================================
+
+EXPECTED OUTPUT:
+151
+10
+5
+
+EXPLANATION:
+The for loop starts at the final array index
+and moves backwards until index 0.
+
+========================================
+CS-05
+========================================
+
+EXPECTED OUTPUT:
+Banana
+Orange
+Other
+
+EXPLANATION:
+num equals 1, so execution starts at case 1.
+Because there are no break statements,
+execution falls through to case 2 and default.
+
+========================================
+CS-06
+========================================
+
+EXPECTED OUTPUT:
+Loop: 0
+Loop: 2
+Loop: 4
+Loop: 6
+Loop: 8
+
+EXPLANATION:
+The loop processes values from 0 to 9.
+Only even numbers are printed.
+
+========================================
+CS-07
+========================================
+
+EXPECTED OUTPUT:
+30
+
+EXPLANATION:
+The while loop adds:
+0 + 2 + 4 + 6 + 8 + 10 = 30
+
+========================================
+CS-08
+========================================
+
+EXPECTED OUTPUT:
+i=1, j=2
+i=1, j=3
+i=2, j=2
+i=2, j=3
+
+EXPLANATION:
+The outer loop takes i=1 and i=2.
+For each i, the inner loop takes j=2 and j=3.
+
+========================================
+CS-09
+========================================
+
+EXPECTED OUTPUT:
+Maze Runner
+3
+
+EXPLANATION:
+game["name"] accesses the name property.
+game[key] uses the variable key, whose
+value is "level", so the result is 3.
+It does not access the literal "key" property.
+
+========================================
+CS-10
+========================================
+
+EXPECTED OUTPUT:
+apple is long
+
+EXPLANATION:
+The first word is "apple".
+Its length is 5, which satisfies length > 4.
+The program prints the message and exits
+the loop because of break.
+
+========================================
+GENERAL ANSWER KEY NOTES
+========================================
+
+1. The outputs are based on the original JavaScript snippets.
+2. Accept semantically identical output formatting.
+3. Do not require explanations for full credit.
+4. Do not accept an incorrect number, word or line
+   as correct merely because it looks similar.
+5. Check the number and order of printed lines.
+6. Do not confuse array contents with array indices.
+7. Do not assume switch automatically stops after a case.
+8. Do not overlook break in loops.
+9. Apply the approved rubric when awarding partial credit.

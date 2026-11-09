@@ -1,0 +1,65 @@
+PART 4: ER DIAGRAM
+QUESTION ID: ER-01
+TOTAL SCORE: 30
+SOURCE: QualifyExam_answerKey(2).pdf, page 6
+STATUS: ORIGINAL EXAM QUESTION
+
+========================================
+ORIGINAL QUESTION
+========================================
+
+III. (30 คะแนน)
+
+“บริษัทแห่งหนึ่งประกอบธุรกิจเกี่ยวกับการซื้อขายวัสดุก่อสร้าง เพื่อให้การทำงานของบริษัทเป็นไปอย่างมีประสิทธิภาพ บริษัทดังกล่าวแบ่งโครงสร้างการทำงานออกเป็นหลายแผนก แต่ละแผนกจะมีพนักงานสังกัดอยู่ โดยพนักงานสามารถแบ่งระดับได้เป็น พนักงานชั่วคราว พนักงานประจำ และผู้จัดการซึ่งมีหน้าที่บริหารจัดการภายในแผนก ทั้งนี้แต่ละแผนกสามารถกระจายอยู่ในออฟฟิศได้หลายที่ โดยจะมีออฟฟิศหนึ่งทำหน้าที่เป็นสำนักงานใหญ่”
+
+จากข้อมูลความต้องการของระบบ (Requirement) ข้างต้น จงออกแบบฐานข้อมูลในรูปแบบของ ER-Diagram โดยเงื่อนไขในการออกแบบ ได้แก่
+
+- จำเป็นต้องระบุข้อมูล fields และ data types ของแต่ละ table ให้ครบตาม Requirement
+- จำเป็นต้องระบุความสัมพันธ์ (Relationships) และระดับความสัมพันธ์ (Cardinality) ระหว่าง table ให้ครบตาม Requirement
+- สามารถระบุ fields เพิ่มเติมได้ตามความเหมาะสม
+
+========================================
+OFFICIAL SCORING
+========================================
+
+1. จำนวน Table ที่เกี่ยวข้องครบถ้วน (10 คะแนน)
+
+2. รายละเอียด ชื่อ fields และ data types ครบถ้วน อย่างน้อยเท่ากับที่จำเป็นต้องมี (10 คะแนน)
+
+3. Relationships ระหว่าง Table ครบถ้วน และระบุ Cardinality ถูกต้อง (8 คะแนน)
+
+4. Fields เพิ่มเติมที่น่าสนใจ หรือเพิ่มเติมจากที่โจทย์ระบุอย่างเหมาะสม (2 คะแนน)
+
+TOTAL: 30 POINTS
+
+========================================
+PROJECT NOTES
+========================================
+
+QUESTION TYPE: ER Diagram
+
+Students create their own ER diagrams.
+
+The answer must represent:
+- Tables / Entities
+- Fields / Attributes
+- Data Types
+- Relationships
+- Cardinality
+
+PK and FK should be considered when evaluating
+the database design and its relationships.
+
+The grading system must support alternative
+valid database designs.
+
+Do not require identical table names or identical
+field names when the meaning is equivalent.
+
+Do not use exact JSON string matching for grading.
+
+The student's actual answer is stored in the
+project's ER Diagram JSON representation.
+
+The JSON schema must be confirmed from the
+existing student exam implementation.

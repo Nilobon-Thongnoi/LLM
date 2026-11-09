@@ -1,0 +1,187 @@
+PART 4: ER DIAGRAM
+QUESTION ID: ER-01
+MAXIMUM SCORE: 30
+
+REFERENCE:
+QualifyExam_answerKey(2).pdf, page 6
+
+ANSWER KEY STATUS:
+Based on the teacher's reference ER diagram.
+Additional details are proposed for testing.
+
+========================================
+REFERENCE TABLES
+========================================
+
+TABLE 1: Department
+
+Fields:
+dept_id       INTEGER       PK
+dept_name     VARCHAR(20)
+office_id     INTEGER
+
+Purpose:
+Stores company departments.
+
+TABLE 2: Employee
+
+Fields:
+emp_id        INTEGER       PK
+emp_fname     VARCHAR(20)
+emp_lname     VARCHAR(20)
+dept_id       INTEGER       FK
+emp_type_id   INTEGER       FK
+
+Purpose:
+Stores employees and their department and
+employment type.
+
+TABLE 3: Employee_Type
+
+Fields:
+emp_type_id   INTEGER       PK
+emp_type_name VARCHAR(20)
+
+Purpose:
+Stores employment categories such as:
+- Temporary Employee
+- Permanent Employee
+- Manager
+
+TABLE 4: Office
+
+Fields:
+office_id       INTEGER       PK
+office_name     VARCHAR
+office_addr     VARCHAR
+is_headquarter  BOOLEAN
+
+Purpose:
+Stores office locations and identifies
+which office is the head office.
+
+TABLE 5: Department_Office
+
+Fields:
+dept_id       INTEGER       FK
+office_id     INTEGER       FK
+
+Suggested composite primary key:
+(dept_id, office_id)
+
+Purpose:
+Represents the many-to-many relationship
+between departments and offices.
+
+========================================
+REFERENCE RELATIONSHIPS
+========================================
+
+1. Department -> Employee
+
+Cardinality:
+1:M
+
+One department can contain many employees.
+Each employee belongs to one department.
+
+Implementation:
+Employee.dept_id references Department.dept_id.
+
+2. Employee_Type -> Employee
+
+Cardinality:
+1:M
+
+One employment type can apply to many employees.
+Each employee has one employment type.
+
+Implementation:
+Employee.emp_type_id references
+Employee_Type.emp_type_id.
+
+3. Department <-> Office
+
+Cardinality:
+M:N
+
+A department can operate in multiple offices.
+An office can accommodate multiple departments.
+
+Implementation:
+Department_Office is used as a junction table.
+
+Department -> Department_Office = 1:M
+Office -> Department_Office = 1:M
+
+========================================
+IMPORTANT REFERENCE NOTES
+========================================
+
+The teacher's handwritten reference shows
+Department, Employee, Employee Type, Office,
+and a department-office junction table.
+
+The image also includes an office_id field
+in Department. Its exact intended role is
+not fully specified by the question.
+
+The project team should clarify whether this
+field represents a primary office or is
+redundant with Department_Office.
+
+If the office_id field is retained, define
+its purpose and corresponding relationship.
+
+The business description mentions managers,
+but does not fully specify whether managers
+must have a separate relationship to departments.
+
+A student may model managers as an employee
+type or add an explicit department manager
+reference if justified.
+
+========================================
+ALTERNATIVE VALID DESIGNS
+========================================
+
+ALTERNATIVE 1:
+Use an employment_type column in Employee
+instead of an Employee_Type table.
+
+ALTERNATIVE 2:
+Use different but meaningful table and
+field names with equivalent relationships.
+
+ALTERNATIVE 3:
+Introduce a separate manager assignment
+relationship if the design remains consistent.
+
+ALTERNATIVE 4:
+Use a junction table with a surrogate ID
+instead of a composite primary key.
+
+These alternatives are not automatically
+fully correct. The complete design must
+still satisfy the requirement.
+
+========================================
+AI GRADING NOTES
+========================================
+
+1. Grade by requirements, not visual similarity.
+2. Consider all entities and attributes.
+3. Check appropriate data types.
+4. Check PK and FK consistency.
+5. Check all relevant cardinalities.
+6. Accept reasonable normalization choices.
+7. Do not automatically reward more tables.
+8. Do not automatically penalize different names.
+9. The reference diagram is a guide,
+   not the only acceptable solution.
+10. Flag ambiguous or unsupported designs
+    for human review.
+
+========================================
+END OF REFERENCE ANSWER
+========================================

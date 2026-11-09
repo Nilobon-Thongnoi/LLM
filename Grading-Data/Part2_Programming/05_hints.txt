@@ -1,0 +1,47 @@
+PART 2: PROGRAMMING
+QUESTION ID: PROG-01
+LANGUAGE: JavaScript ONLY
+
+HINT STATUS: Proposed for LLM Testing
+
+HINT RULES:
+1. Maximum 3 hint levels.
+2. Use English for student-facing hints.
+3. Do not reveal complete JavaScript code.
+4. Do not reveal the final tax formula.
+5. Do not calculate the final tax for the student.
+6. Each level must provide a different thinking step.
+7. Use the student's current answer when available.
+8. Do not repeat previous hints.
+9. Do not reveal rubric scores or reference answers.
+
+========================================
+HINT LEVEL 1: GENERAL IDEA
+========================================
+
+Think about how a JavaScript function can use the engine capacity to determine which tax rules apply.
+
+========================================
+HINT LEVEL 2: MORE SPECIFIC
+========================================
+
+Check how the tax rate changes across the three engine capacity ranges. Does the new rate apply to the entire capacity or only to the portion within that range?
+
+========================================
+HINT LEVEL 3: NEXT THINKING STEP
+========================================
+
+Try calculating the tax for each applicable capacity range separately before combining the amounts. Then check whether your function produces the required result type.
+
+========================================
+HINT EVALUATION
+========================================
+
+Test whether the generated hint:
+- Is relevant to the question
+- Matches the requested hint level
+- Helps the student continue independently
+- Does not reveal the solution
+- Does not repeat a previous hint
+- Uses the correct programming language
+- Does not include complete solution code

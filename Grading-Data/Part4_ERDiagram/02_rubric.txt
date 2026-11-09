@@ -1,0 +1,194 @@
+PART 4: ER DIAGRAM
+QUESTION ID: ER-01
+MAXIMUM SCORE: 30
+
+RUBRIC SOURCE:
+QualifyExam_answerKey(2).pdf, page 6
+
+RUBRIC STATUS:
+Official teacher criteria and maximum scores.
+Detailed partial-credit guidance is proposed
+and requires teacher/team approval.
+
+========================================
+R1: TABLES / ENTITIES (10 POINTS)
+========================================
+
+OFFICIAL CRITERION:
+จำนวน Table ที่เกี่ยวข้องครบถ้วน (10 คะแนน)
+
+REFERENCE DESIGN:
+Department
+Employee
+Employee Type
+Office
+Department-Office (junction table)
+
+PROPOSED PARTIAL CREDIT:
+
+2 points: Department is represented.
+2 points: Employee is represented.
+2 points: Employee Type is represented.
+2 points: Office is represented.
+2 points: Department-Office many-to-many
+          relationship is resolved appropriately.
+
+MAXIMUM: 10
+
+IMPORTANT:
+A valid alternative design may represent employee
+types using a field instead of a separate table.
+
+A valid alternative may also use a different
+relationship design if its constraints satisfy
+the requirement.
+
+Do not automatically deduct points only because
+a design has fewer tables than the reference.
+
+========================================
+R2: FIELDS AND DATA TYPES (10 POINTS)
+========================================
+
+OFFICIAL CRITERION:
+รายละเอียด ชื่อ fields และ data types ครบถ้วน
+อย่างน้อยเท่ากับที่จำเป็นต้องมี (10 คะแนน)
+
+PROPOSED PARTIAL CREDIT:
+
+2 points:
+Department has meaningful identifying fields.
+
+2 points:
+Employee has meaningful identifying fields.
+
+2 points:
+Employee type or employment classification
+is represented correctly.
+
+2 points:
+Office has meaningful identifying fields,
+including a way to identify the head office.
+
+2 points:
+Primary keys, foreign keys and data types
+are appropriate for the design.
+
+MAXIMUM: 10
+
+GRADING NOTES:
+- Accept equivalent field names.
+- Accept reasonable compatible SQL data types.
+- Do not require one exact VARCHAR length.
+- Do not penalize cosmetic naming differences.
+- Consider PK/FK placement and validity.
+- Avoid penalizing the same missing field repeatedly.
+
+========================================
+R3: RELATIONSHIPS AND CARDINALITY (8 POINTS)
+========================================
+
+OFFICIAL CRITERION:
+Relationships ระหว่าง Table ครบถ้วน
+และระบุ Cardinality ถูกต้อง (8 คะแนน)
+
+PROPOSED PARTIAL CREDIT:
+
+2 points:
+Department and Employee relationship
+is correctly represented.
+
+2 points:
+Employee and Employee Type relationship
+or equivalent classification is valid.
+
+2 points:
+Department and Office relationship
+is correctly represented.
+
+2 points:
+Cardinality and relationship implementation
+are consistent with the proposed database design.
+
+MAXIMUM: 8
+
+GRADING NOTES:
+- Department to Employee is normally 1:M.
+- Employee Type to Employee is normally 1:M
+  when Employee Type is a separate table.
+- Department to Office can be M:N through
+  a junction table in the reference design.
+- Evaluate alternative representations by
+  their actual semantics.
+- Do not give full credit for a relationship
+  that contradicts the requirements.
+
+========================================
+R4: ADDITIONAL USEFUL FIELDS (2 POINTS)
+========================================
+
+OFFICIAL CRITERION:
+Fields เพิ่มเติมที่น่าสนใจ หรือเพิ่มเติมจาก
+ที่โจทย์ระบุอย่างเหมาะสม (2 คะแนน)
+
+PROPOSED PARTIAL CREDIT:
+
+2 points:
+Adds useful, relevant fields and explains or
+demonstrates their purpose.
+
+1 point:
+Adds a relevant field, but its use or
+appropriateness is limited or unclear.
+
+0 points:
+No meaningful additional fields.
+
+EXAMPLES:
+- employee_email
+- hire_date
+- office_phone
+- department_description
+
+Do not award points for unrelated fields.
+
+========================================
+GENERAL AI GRADING RULES
+========================================
+
+1. Evaluate the ER Diagram requirements.
+2. Award points independently per criterion.
+3. Support partial credit.
+4. Accept alternative valid designs.
+5. Do not require exact matching with the
+   reference diagram.
+6. Do not require exact naming.
+7. Validate the semantics of relationships.
+8. Check cardinality and PK/FK consistency.
+9. Consider whether the data model can
+   represent the business requirements.
+10. Do not reward unrelated extra tables.
+11. Do not double-penalize one missing element.
+12. Give reasons for all awarded points.
+13. If the diagram cannot be parsed,
+    flag for review instead of inventing data.
+14. If the diagram is empty, score zero.
+15. Never exceed the maximum score.
+
+========================================
+TOTAL
+========================================
+
+R1 = 10
+R2 = 10
+R3 = 8
+R4 = 2
+
+TOTAL = 30
+
+IMPORTANT:
+The detailed allocation above is proposed.
+The teacher must confirm partial-credit rules.
+
+The official rubric does not explicitly require
+one exact number of tables.

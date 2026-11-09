@@ -1,0 +1,285 @@
+PART 4: ER DIAGRAM
+QUESTION ID: ER-01
+MAXIMUM SCORE: 30
+
+DATA TYPE:
+Synthetic ER Diagram grading test cases
+
+STATUS:
+Proposed examples and expected scores.
+Not official teacher-graded answers.
+
+RUBRIC:
+R1 Tables / Entities = 10
+R2 Fields and Data Types = 10
+R3 Relationships and Cardinality = 8
+R4 Additional Useful Fields = 2
+
+IMPORTANT:
+These are logical representations, NOT the
+actual ER Diagram JSON schema used by the web.
+
+========================================
+CASE ER01: FULLY CORRECT
+========================================
+
+STUDENT DESIGN:
+
+Tables:
+Department
+Employee
+Employee_Type
+Office
+Department_Office
+
+Fields:
+Includes appropriate IDs, names, data types,
+primary keys and foreign keys.
+
+Relationships:
+Department 1:M Employee
+Employee_Type 1:M Employee
+Department M:N Office through Department_Office
+
+Office includes a field identifying
+the head office.
+
+Additional fields:
+employee_email
+hire_date
+
+EXPECTED SCORES:
+R1 = 10/10
+R2 = 10/10
+R3 = 8/8
+R4 = 2/2
+
+TOTAL = 30/30
+
+REASON:
+มีโครงสร้างหลักครบ Fields และ Data Types เหมาะสม
+ความสัมพันธ์ถูกต้อง และมี Fields เพิ่มเติมที่มีประโยชน์
+
+========================================
+CASE ER02: MOSTLY CORRECT
+========================================
+
+STUDENT DESIGN:
+
+Tables:
+Department
+Employee
+Employee_Type
+Office
+Department_Office
+
+Fields:
+Most required fields and data types are present.
+Office does not identify the head office.
+
+Relationships:
+Department 1:M Employee
+Employee_Type 1:M Employee
+Department M:N Office
+
+Additional fields:
+employee_email
+
+EXPECTED SCORES:
+R1 = 10/10
+R2 = 8/10
+R3 = 8/8
+R4 = 1/2
+
+TOTAL = 27/30
+
+REASON:
+โครงสร้างหลักครบ แต่ขาดการระบุสำนักงานใหญ่
+และมี Field เพิ่มเติมเพียงบางส่วนตามเกณฑ์ร่าง
+
+========================================
+CASE ER03: PARTIALLY CORRECT
+========================================
+
+STUDENT DESIGN:
+
+Tables:
+Department
+Employee
+Office
+
+Fields:
+Department has dept_id and dept_name.
+Employee has emp_id and emp_name.
+Office has office_id and office_name.
+
+Relationships:
+Department 1:M Employee
+
+Missing:
+Employment classification
+Department-Office association
+Head office identification
+Several required fields and data types
+
+EXPECTED SCORES:
+R1 = 6/10
+R2 = 4/10
+R3 = 2/8
+R4 = 0/2
+
+TOTAL = 12/30
+
+REASON:
+มีตารางพื้นฐานและความสัมพันธ์บางส่วน
+แต่ยังไม่รองรับ Requirement ทั้งหมด
+
+========================================
+CASE ER04: ONE CRITERION ONLY
+========================================
+
+STUDENT DESIGN:
+
+Tables:
+Department
+Employee
+Employee_Type
+Office
+Department_Office
+
+Fields:
+Only table names are supplied.
+No fields or data types.
+
+Relationships:
+None defined.
+
+EXPECTED SCORES:
+R1 = 8/10
+R2 = 0/10
+R3 = 0/8
+R4 = 0/2
+
+TOTAL = 8/30
+
+REASON:
+ระบุตารางที่เกี่ยวข้องได้ แต่ยังไม่มีรายละเอียด
+สำหรับการนำไปใช้ออกแบบฐานข้อมูลจริง
+
+REVIEW NOTE:
+The exact R1 credit for table names alone
+requires teacher confirmation.
+
+========================================
+CASE ER05: GOOD STRUCTURE, WRONG CARDINALITY
+========================================
+
+STUDENT DESIGN:
+
+Tables:
+Department
+Employee
+Employee_Type
+Office
+Department_Office
+
+Fields:
+All required fields and data types are present.
+
+Relationships:
+Department M:N Employee
+Employee_Type 1:M Employee
+Department 1:1 Office
+
+Additional fields:
+employee_email
+office_phone
+
+EXPECTED SCORES:
+R1 = 10/10
+R2 = 10/10
+R3 = 2/8
+R4 = 2/2
+
+TOTAL = 24/30
+
+REASON:
+Entities และ Fields ครบ แต่ Cardinality
+ของ Department-Employee และ Department-Office
+ไม่สอดคล้องกับแนวเฉลย
+
+REVIEW NOTE:
+Check whether the wrong relationships also
+invalidate some declared foreign keys.
+If so, reconsider R2 without double-penalizing.
+
+========================================
+CASE ER06: COMPLETELY INCORRECT
+========================================
+
+STUDENT DESIGN:
+
+Tables:
+Product
+Payment
+Shipping
+
+Fields:
+product_price
+payment_amount
+shipping_cost
+
+Relationships:
+Product 1:1 Payment
+Payment 1:1 Shipping
+
+EXPECTED SCORES:
+R1 = 0/10
+R2 = 0/10
+R3 = 0/8
+R4 = 0/2
+
+TOTAL = 0/30
+
+REASON:
+ไม่ตอบ Requirement เกี่ยวกับแผนก
+พนักงาน ประเภทพนักงาน และสำนักงาน
+
+========================================
+CASE ER07: EMPTY ANSWER
+========================================
+
+STUDENT DESIGN:
+[EMPTY]
+
+EXPECTED SCORES:
+R1 = 0/10
+R2 = 0/10
+R3 = 0/8
+R4 = 0/2
+
+TOTAL = 0/30
+
+REASON:
+No answer submitted.
+
+========================================
+EVALUATION RULES
+========================================
+
+1. These are synthetic student designs.
+2. Expected scores are provisional.
+3. Teacher/team approval is required.
+4. Accept alternative valid ER models.
+5. Do not compare JSON strings directly.
+6. Evaluate table meaning, fields,
+   data types and relationships.
+7. Compare AI scores per rubric criterion.
+8. Do not send expected scores to the LLM.
+9. Confirm actual ER Diagram JSON format
+   before integration testing.
+10. Review ambiguous cases manually.
+
+========================================
+END OF TEST DATA
+========================================

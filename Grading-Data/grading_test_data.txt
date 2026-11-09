@@ -1,0 +1,65 @@
+Question: Calculate the annual vehicle tax based on engine capacity.
+
+Reference rules:
+- First 600 cc: 0.5 baht per cc
+- 601-1800 cc: 1.5 baht per cc
+- Above 1800 cc: 4 baht per cc
+- Calculate tax progressively for each range.
+
+Example Rubric (10 points):
+1. Accepts engine capacity and returns a result: 2 points
+2. Calculates all tax ranges correctly: 5 points
+3. Handles the conditions correctly: 3 points
+
+These scores are proposed test labels, not teacher-approved grades.
+
+CASE A - Fully correct
+Student Answer:
+function calculateTax(cc) {
+  let tax = 0;
+  if (cc <= 600) {
+    tax = cc * 0.5;
+  } else if (cc <= 1800) {
+    tax = 300 + (cc - 600) * 1.5;
+  } else {
+    tax = 2100 + (cc - 1800) * 4;
+  }
+  return tax;
+}
+Expected Score: 10/10
+
+CASE B - Partially correct
+Student Answer:
+function calculateTax(cc) {
+  if (cc <= 600) {
+    return cc * 0.5;
+  } else if (cc <= 1800) {
+    return 300 + (cc - 600) * 1.5;
+  } else {
+    return cc * 4;
+  }
+}
+Expected Score: 7/10
+Reason: The first two ranges are correct, but the final range is not progressive.
+
+CASE C - Only a small part correct
+Student Answer:
+function calculateTax(cc) {
+  let tax = cc * 0.5;
+  return tax;
+}
+Expected Score: 3/10
+Reason: A function and return value are present, but the other tax ranges are missing.
+
+CASE D - Very limited correct work
+Student Answer:
+function calculateTax(cc) {
+  return 0;
+}
+Expected Score: 2/10
+Reason: The function accepts a parameter and returns a value, but does not calculate tax.
+
+CASE E - No answer
+Student Answer:
+[No answer]
+Expected Score: 0/10
