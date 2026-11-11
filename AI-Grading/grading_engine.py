@@ -5,6 +5,8 @@ from pathlib import Path
 
 import requests
 
+from knowledge_base import retrieve_knowledge
+
 
 MODEL = os.getenv("GRADING_MODEL", "qwen3.5:9b")
 OLLAMA_URL = os.getenv(
@@ -139,9 +141,6 @@ def get_result_schema():
             "criterion_id": {
                 "type": "string"
             },
-            "awarded_score": {
-                "type": "number"
-            },
             "evidence": {
                 "type": "string"
             },
@@ -151,13 +150,16 @@ def get_result_schema():
             "reason": {
                 "type": "string"
             },
+            "awarded_score": {
+                "type": "number"
+            },
         },
         "required": [
             "criterion_id",
-            "awarded_score",
             "evidence",
             "missing",
             "reason",
+            "awarded_score",
         ],
     }
 
@@ -192,7 +194,7 @@ def get_result_schema():
 
 
 # ส่งคำตอบไปให้ Qwen ประเมินตาม Prompt
-def ask_ollama(data, criteria, rubric_status, correction=""):
+def ask_ollama(data, criteria, rubric_status, correction="", knowledge=None):
     prompt = PROMPT_FILE.read_text(encoding="utf-8").strip()
 
     if not prompt:
@@ -206,6 +208,9 @@ def ask_ollama(data, criteria, rubric_status, correction=""):
         "rubric": criteria,
         "rubric_status": rubric_status,
     }
+
+    if knowledge:
+        grading_data["retrieved_knowledge"] = knowledge
 
     if correction:
         grading_data["format_correction"] = correction
@@ -223,8 +228,8 @@ def ask_ollama(data, criteria, rubric_status, correction=""):
             "because: " + correction
             + "\nRe-evaluate the student answer. "
             "Include all five fields for every criterion: "
-            "criterion_id, awarded_score, evidence, "
-            "missing, and reason. "
+            "criterion_id, evidence, missing, reason, "
+            "and awarded_score. "
             "Never invent evidence."
         )
 
@@ -413,7 +418,11 @@ def grade_answer(data):
             "confidence": "high",
             "review_reasons": [],
             "rubric_status": rubric_status,
+            "knowledge_id": None,
         }
+
+    # ดึงคำตอบที่ถูก ตัวอย่างการให้คะแนน และความรู้ที่เกี่ยวข้อง (RAG)
+    knowledge = retrieve_knowledge(data)
 
     error_message = ""
 
@@ -424,15 +433,20 @@ def grade_answer(data):
                 data,
                 criteria,
                 rubric_status,
-                error_message
+                error_message,
+                knowledge=knowledge
             )
 
-            return check_result(
+            checked = check_result(
                 result,
                 criteria,
                 rubric_status,
                 data["student_answer"]
             )
+
+            checked["knowledge_id"] = knowledge.get("question_id")
+
+            return checked
 
         except (ValueError, TypeError, KeyError) as error:
             error_message = str(error)

@@ -1,0 +1,29 @@
+{
+  "id": "ER-01",
+  "exam_part": 4,
+  "domains": [
+    "er_diagram"
+  ],
+  "status": "draft - partial-credit rules are proposed, confirm with the teacher",
+  "question": "บริษัทแห่งหนึ่งประกอบธุรกิจเกี่ยวกับการซื้อขายวัสดุก่อสร้าง เพื่อให้การทำงานของบริษัทเป็นไปอย่างมีประสิทธิภาพ บริษัทดังกล่าวแบ่งโครงสร้างการทำงานออกเป็นหลายแผนก แต่ละแผนกจะมีพนักงานสังกัดอยู่ โดยพนักงานสามารถแบ่งระดับได้เป็น พนักงานชั่วคราว พนักงานประจำ และผู้จัดการซึ่งมีหน้าที่บริหารจัดการภายในแผนก ทั้งนี้แต่ละแผนกสามารถกระจายอยู่ในออฟฟิศได้หลายที่ โดยจะมีออฟฟิศหนึ่งทำหน้าที่เป็นสำนักงานใหญ่ จากข้อมูลความต้องการของระบบ (Requirement) ข้างต้น จงออกแบบฐานข้อมูลในรูปแบบของ ER-Diagram โดยเงื่อนไขในการออกแบบ ได้แก่ จำเป็นต้องระบุข้อมูล fields และ data types ของแต่ละ table ให้ครบตาม Requirement จำเป็นต้องระบุความสัมพันธ์ (Relationships) และระดับความสัมพันธ์ (Cardinality) ระหว่าง table ให้ครบตาม Requirement สามารถระบุ fields เพิ่มเติมได้ตามความเหมาะสม",
+  "accepted_answers": [
+    {
+      "label": "Teacher reference design (full score)",
+      "answer": "Department(dept_id INTEGER PK, dept_name VARCHAR); Employee(emp_id INTEGER PK, emp_fname VARCHAR, emp_lname VARCHAR, dept_id INTEGER FK -> Department, emp_type_id INTEGER FK -> Employee_Type); Employee_Type(emp_type_id INTEGER PK, emp_type_name VARCHAR) with values temporary / permanent / manager; Office(office_id INTEGER PK, office_name VARCHAR, office_addr VARCHAR, is_headquarter BOOLEAN); Department_Office(dept_id FK, office_id FK, PK(dept_id, office_id)). Relationships: Department 1:M Employee; Employee_Type 1:M Employee; Department M:N Office through Department_Office (Department 1:M Department_Office, Office 1:M Department_Office)."
+    },
+    {
+      "label": "Valid alternative (full score if complete)",
+      "answer": "Employee stores employment type as a column (e.g. emp_type VARCHAR or ENUM 'temporary','permanent','manager') instead of a separate Employee_Type table. Junction table may use a surrogate id instead of a composite key. Table and field names may differ when the meaning is the same."
+    }
+  ],
+  "grading_notes": [
+    "Grade by meaning, not by names or layout. Ignore diagram coordinates and random element ids in the JSON.",
+    "Required concepts: department, employee, employee type (table or column), office, a way to mark the head office, and a department-office many-to-many link.",
+    "Department-Office must be M:N (junction table). A 1:1 or 1:M Department-Office relationship contradicts the requirement that a department can be in many offices.",
+    "Department-Employee is 1:M. M:N Department-Employee contradicts 'each employee belongs to a department'.",
+    "Representing employee type as a column is valid and should not lose table credit.",
+    "A relationship counts only if the JSON has a relationship (or FK) with valid source and target tables. Similar field names alone do not prove a relationship.",
+    "Extra useful fields (email, hire_date, phone, description, salary) earn additional-field credit; unrelated fields do not."
+  ],
+  "graded_examples": []
+}

@@ -1,0 +1,203 @@
+{
+  "id": "PROG-01",
+  "exam_part": 2,
+  "domains": [
+    "javascript",
+    "logic"
+  ],
+  "status": "draft - expected scores are proposed, confirm with the teacher",
+  "question": "จงสร้างฟังก์ชันเพื่อคำนวณอัตราภาษีรถยนต์นั่งส่วนบุคคลรายปี โดยวิธีการคำนวณภาษีดังกล่าวมีดังต่อไปนี้ อัตราภาษีจะคำนวณอ้างอิงจากขนาดความจุของกระบอกสูบ (CC) ตั้งแต่ 1-600 cc คิดอัตราภาษี cc ละ 0.5 บาท ตั้งแต่ 601-1,800 cc คิดอัตราภาษี cc ละ 1.5 บาท ตั้งแต่ 1,801 cc ขึ้นไป คิดอัตราภาษี cc ละ 4 บาท ตัวอย่างการคำนวณภาษีรถยนต์ Toyota Camry รุ่น 2.0 cc (2000 cc) 600 cc แรก อัตราภาษี 600 x 0.5 = 300 บาท 601-1,800 cc อัตราภาษี (1,800 - 600) x 1.5 = 1,800 บาท ส่วนเกินจาก 1,800 cc อัตราภาษี (2,000 - 1,800) x 4 = 800 บาท รวมอัตราภาษีที่ต้องจ่ายรายปี เท่ากับ 300 + 1,800 + 800 = 2,900 บาท เงื่อนไขในการสร้างฟังก์ชัน ได้แก่ จำเป็นต้องรับพารามิเตอร์ ได้แก่ ค่าความจุของกระบอกสูบรถยนต์ (CC) ผลลัพธ์ที่ได้จากฟังก์ชัน คือ จำนวนเงินภาษี ซึ่งมีชนิดข้อมูลเป็นเลขจำนวนเต็ม (Integer)",
+  "accepted_answers": [
+    {
+      "label": "Correct solution 1: if / else (full score)",
+      "answer": "function taxCalculate(carCC) {\n  let totalTax = 0;\n  if (carCC <= 600) {\n    totalTax = carCC * 0.5;\n  } else if (carCC <= 1800) {\n    totalTax = 300 + (carCC - 600) * 1.5;\n  } else {\n    totalTax = 300 + 1800 + (carCC - 1800) * 4;\n  }\n  return Math.trunc(totalTax);\n}"
+    },
+    {
+      "label": "Correct solution 2: switch (true) (full score)",
+      "answer": "function calculateTax(cc) {\n  let tax = 0;\n  switch (true) {\n    case cc <= 600:\n      tax = cc * 0.5;\n      break;\n    case cc <= 1800:\n      tax = 300 + (cc - 600) * 1.5;\n      break;\n    default:\n      tax = 2100 + (cc - 1800) * 4;\n  }\n  return Math.trunc(tax);\n}"
+    }
+  ],
+  "grading_notes": [
+    "Both accepted answers are fully correct and earn the maximum score. Any other JavaScript solution that gives the same results for every CC value is also fully correct.",
+    "2100 is the same as 300 + 1800 (tax of the first two tiers). Writing 2100, 300 + 1800, or calculating each tier separately and adding them are all correct.",
+    "Conditions may be written as cc <= 600 / cc <= 1800 / else, as cc > 1800 / cc > 600 / else (reverse order), as ranges with && , or with switch(true). All handle the three ranges correctly.",
+    "Function and parameter: function declaration, function expression, or arrow function are all valid. Any function and parameter name is acceptable.",
+    "Output: returning the tax OR displaying it with console.log both earn full output credit (teacher rubric accepts display/return).",
+    "Integer conversion: Math.trunc, Math.floor, Math.round, parseInt(...) and the bitwise | 0 all produce an integer for these positive values and earn full integer credit. toFixed(0) returns a string, so it is only partially correct. No conversion at all earns zero for this criterion.",
+    "Common mistake: applying one rate to the whole CC (e.g. cc * 1.5 or cc * 4) instead of progressive tiers. The conditions can still be correct; only the calculation for that tier loses points.",
+    "Expected results: 600 -> 300, 1000 -> 900, 1800 -> 2100, 2000 -> 2900, 2500 -> 4900. Use them to check the student's formulas mentally.",
+    "Rubric detail (proposed): function 2 + parameter 2; each of the 3 range conditions 2; each of the 3 tier calculations 2; output 2; integer conversion 2."
+  ],
+  "graded_examples": [
+    {
+      "label": "Fully correct with console.log and Math.floor",
+      "student_answer": "const tax = (engine) => {\n  let t;\n  if (engine > 1800) t = (engine - 1800) * 4 + 2100;\n  else if (engine > 600) t = (engine - 600) * 1.5 + 300;\n  else t = engine * 0.5;\n  console.log(Math.floor(t));\n};",
+      "criterion_scores": [
+        {
+          "criterion": "Function and parameter",
+          "awarded": 4,
+          "max": 4
+        },
+        {
+          "criterion": "Conditions for all three ranges",
+          "awarded": 6,
+          "max": 6
+        },
+        {
+          "criterion": "Progressive tax calculation",
+          "awarded": 6,
+          "max": 6
+        },
+        {
+          "criterion": "Output (display or return)",
+          "awarded": 2,
+          "max": 2
+        },
+        {
+          "criterion": "Integer conversion",
+          "awarded": 2,
+          "max": 2
+        }
+      ],
+      "total": 20,
+      "max_total": 20,
+      "explanation": "Arrow function, reversed condition order and console.log are all valid. Math.floor gives an integer."
+    },
+    {
+      "label": "Correct calculation but no integer conversion",
+      "student_answer": "function calculateTax(cc) {\n  let tax = 0;\n  if (cc <= 600) {\n    tax = cc * 0.5;\n  } else if (cc <= 1800) {\n    tax = 300 + (cc - 600) * 1.5;\n  } else {\n    tax = 2100 + (cc - 1800) * 4;\n  }\n  return tax;\n}",
+      "criterion_scores": [
+        {
+          "criterion": "Function and parameter",
+          "awarded": 4,
+          "max": 4
+        },
+        {
+          "criterion": "Conditions for all three ranges",
+          "awarded": 6,
+          "max": 6
+        },
+        {
+          "criterion": "Progressive tax calculation",
+          "awarded": 6,
+          "max": 6
+        },
+        {
+          "criterion": "Output (display or return)",
+          "awarded": 2,
+          "max": 2
+        },
+        {
+          "criterion": "Integer conversion",
+          "awarded": 0,
+          "max": 2
+        }
+      ],
+      "total": 18,
+      "max_total": 20,
+      "explanation": "Everything is correct except the result is not converted to an integer."
+    },
+    {
+      "label": "Flat rate in tiers 2 and 3",
+      "student_answer": "function calculateTax(cc) {\n  let tax = 0;\n  if (cc <= 600) {\n    tax = cc * 0.5;\n  } else if (cc <= 1800) {\n    tax = cc * 1.5;\n  } else {\n    tax = cc * 4;\n  }\n  return Math.trunc(tax);\n}",
+      "criterion_scores": [
+        {
+          "criterion": "Function and parameter",
+          "awarded": 4,
+          "max": 4
+        },
+        {
+          "criterion": "Conditions for all three ranges",
+          "awarded": 6,
+          "max": 6
+        },
+        {
+          "criterion": "Progressive tax calculation",
+          "awarded": 2,
+          "max": 6
+        },
+        {
+          "criterion": "Output (display or return)",
+          "awarded": 2,
+          "max": 2
+        },
+        {
+          "criterion": "Integer conversion",
+          "awarded": 2,
+          "max": 2
+        }
+      ],
+      "total": 16,
+      "max_total": 20,
+      "explanation": "Conditions are correct, but tiers 2 and 3 charge one rate on the whole CC instead of progressive tiers. Only tier 1 calculation is correct."
+    },
+    {
+      "label": "Function stub only",
+      "student_answer": "function calculateTax(cc) {\n  let tax = 0;\n}",
+      "criterion_scores": [
+        {
+          "criterion": "Function and parameter",
+          "awarded": 4,
+          "max": 4
+        },
+        {
+          "criterion": "Conditions for all three ranges",
+          "awarded": 0,
+          "max": 6
+        },
+        {
+          "criterion": "Progressive tax calculation",
+          "awarded": 0,
+          "max": 6
+        },
+        {
+          "criterion": "Output (display or return)",
+          "awarded": 0,
+          "max": 2
+        },
+        {
+          "criterion": "Integer conversion",
+          "awarded": 0,
+          "max": 2
+        }
+      ],
+      "total": 4,
+      "max_total": 20,
+      "explanation": "Only the function and parameter are present."
+    },
+    {
+      "label": "Unrelated code",
+      "student_answer": "let carCC = 2000;\nlet tax = carCC + 100;\nconsole.log(\"Hello\");",
+      "criterion_scores": [
+        {
+          "criterion": "Function and parameter",
+          "awarded": 0,
+          "max": 4
+        },
+        {
+          "criterion": "Conditions for all three ranges",
+          "awarded": 0,
+          "max": 6
+        },
+        {
+          "criterion": "Progressive tax calculation",
+          "awarded": 0,
+          "max": 6
+        },
+        {
+          "criterion": "Output (display or return)",
+          "awarded": 0,
+          "max": 2
+        },
+        {
+          "criterion": "Integer conversion",
+          "awarded": 0,
+          "max": 2
+        }
+      ],
+      "total": 0,
+      "max_total": 20,
+      "explanation": "No function, no ranges, and the printed value is not the tax."
+    }
+  ]
+}

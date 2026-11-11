@@ -1,0 +1,121 @@
+{
+  "id": "ALG-01",
+  "exam_part": 3,
+  "domains": [
+    "algorithm"
+  ],
+  "status": "draft - rubric and expected scores are proposed, confirm with the teacher",
+  "question": "คุณกำลังพัฒนาแอปพลิเคชันเพื่อช่วยแพทย์ในการวินิจฉัยโรคหายาก (Rare Disease) โดยการวิเคราะห์ชุดอาการ (Symptoms) ของผู้ป่วย สมมติให้ในฐานข้อมูลมีโรคที่เป็นไปได้ N โรค โดยแต่ละโรคมีรายการของอาการที่เกี่ยวข้อง โรคที่ซับซ้อนบางโรคอาจมีอาการที่คล้ายกับโรคอื่น ๆ a. ออกแบบโครงสร้างข้อมูลที่ใช้สำหรับเก็บข้อมูลชุดอาการ และชุดโรคหายาก พร้อมออกแบบอัลกอริทึมค้นหา (Search Algorithm) ที่เหมาะสมที่สุดสำหรับโครงสร้างข้อมูลที่ได้ออกแบบมา เพื่อใช้ในการระบุโรคที่เป็นไปได้มากที่สุด 3 อันดับแรก ที่ตรงกับอาการที่รายงานของผู้ป่วย โดยให้อธิบายว่าอัลกอริทึมของคุณทำงานอย่างไรโดยละเอียด b. กำหนดให้ N คือจำนวนโรคทั้งหมด และ M คือจำนวนอาการที่ผู้ป่วยรายงาน ให้วิเคราะห์ความซับซ้อนเชิงเวลา (Time Complexity) ของอัลกอริทึมที่คุณออกแบบในกรณีที่เลวร้ายที่สุด (Worst-Case Scenario) ในรูปของ Big O c. อธิบายข้อจำกัดสำคัญ 2 ประการที่อาจเกิดขึ้นในการใช้อัลกอริทึมนี้ในสถานการณ์จริง และเสนอแนวทางการปรับปรุงอัลกอริทึมเพื่อแก้ไขข้อจำกัดเหล่านั้น",
+  "accepted_answers": [
+    {
+      "label": "Reference approach: inverted index + match counting (one of several valid designs)",
+      "answer": "(a) เก็บข้อมูลโรคเป็น Hash Map: disease_id -> รายการอาการ และสร้าง Inverted Index: อาการ -> รายชื่อโรคที่มีอาการนั้น เมื่อรับอาการผู้ป่วย ตัดอาการซ้ำ แล้วดึงรายชื่อโรคจากแต่ละอาการ นับจำนวนอาการที่ตรงของแต่ละโรค จัดอันดับจากมากไปน้อย เลือก 3 โรคแรก และกำหนดวิธีตัดสินเมื่อคะแนนเท่ากัน (b) N = จำนวนโรค, M = จำนวนอาการที่ผู้ป่วยรายงาน กรณีเลวร้ายที่สุดแต่ละอาการอาจเกี่ยวข้องกับทุกโรค การนับจึงเป็น O(N*M) การเลือก 3 อันดับแรกโดยไม่เรียงทั้งหมดเป็น O(N) รวมเป็น O(N*M) (ถ้าเรียงทั้งหมดเพิ่ม O(N log N)) (c) ข้อจำกัด: อาการซ้อนทับกันหลายโรคทำให้การนับธรรมดาไม่แม่น -> ใช้ weighted matching; ข้อมูลโรค/อาการเพิ่มขึ้นทำให้ต้องสร้างดัชนีใหม่ -> ใช้ incremental update ของ index"
+    }
+  ],
+  "grading_notes": [
+    "The question does not prescribe one algorithm. Array scan, set intersection, hash map, bitset, weighted matching and inverted index are all valid if the student explains how matching and ranking work.",
+    "Complexity must be judged against the student's own algorithm. O(N*M) is not the only correct answer: a full sort adds O(N log N); scanning every disease's full symptom list may be O(N*K) or O(N*M*K) where K is symptoms per disease.",
+    "Do not accept an O(1) worst-case hash lookup claim without the student stating it is an average-case assumption.",
+    "Top 3 must be selected from the highest matching scores. Sorting ascending and taking the first 3 returns the worst matches and earns no ranking credit.",
+    "Missing tie-breaking or duplicate-symptom handling is a minor omission, not a fundamental error.",
+    "Part c needs two different limitations, each with a matching improvement. Overlapping symptoms, growing data, missing or inaccurate symptoms, changing medical knowledge and too little data for rare diseases are all relevant."
+  ],
+  "graded_examples": [
+    {
+      "label": "Part a fully correct",
+      "student_answer": "ใช้ Hash Map เก็บข้อมูลแต่ละโรคและรายการอาการที่เกี่ยวข้อง และใช้ Inverted Index เก็บว่าอาการแต่ละอย่างพบในโรคใดบ้าง เมื่อรับอาการของผู้ป่วยให้ค้นหารายชื่อโรคจากแต่ละอาการ จากนั้นนับจำนวนอาการที่ตรงกันของแต่ละโรค โดยไม่นับอาการที่รายงานซ้ำหลายครั้ง สุดท้ายจัดอันดับโรคจากคะแนนสูงไปต่ำ เลือก 3 โรคแรก และใช้รหัสโรคเป็นเกณฑ์ตัดสินกรณีคะแนนเท่ากัน",
+      "criterion_scores": [
+        {
+          "criterion": "Data structures",
+          "awarded": 3,
+          "max": 3
+        },
+        {
+          "criterion": "Search / matching algorithm",
+          "awarded": 4,
+          "max": 4
+        },
+        {
+          "criterion": "Top 3 ranking",
+          "awarded": 3,
+          "max": 3
+        }
+      ],
+      "total": 10,
+      "max_total": 10,
+      "explanation": "Suitable structures, complete matching and counting, clear top-3 selection with tie-breaking."
+    },
+    {
+      "label": "Part a mostly correct (no tie-break, no duplicate handling)",
+      "student_answer": "ใช้ Hash Map เก็บอาการและโรค โดยให้อาการเป็น Key และรายชื่อโรคเป็น Value เมื่อผู้ป่วยรายงานอาการจะค้นหาโรคจากแต่ละอาการและนับจำนวนครั้งที่พบโรคนั้น จากนั้นเรียงคะแนนจากมากไปน้อยและเลือก 3 โรคแรก",
+      "criterion_scores": [
+        {
+          "criterion": "Data structures",
+          "awarded": 3,
+          "max": 3
+        },
+        {
+          "criterion": "Search / matching algorithm",
+          "awarded": 3,
+          "max": 4
+        },
+        {
+          "criterion": "Top 3 ranking",
+          "awarded": 2,
+          "max": 3
+        }
+      ],
+      "total": 8,
+      "max_total": 10,
+      "explanation": "Main steps are correct; duplicate symptoms and ties are not handled."
+    },
+    {
+      "label": "Part a: array scan without scoring or top 3",
+      "student_answer": "ใช้ Array เก็บชื่อโรคและอาการของโรคแต่ละชนิด จากนั้นวนลูปตรวจสอบโรคทุกโรคว่าอาการของผู้ป่วยตรงกับอาการของโรคนั้นหรือไม่ ถ้าตรงกันจะถือว่าโรคนั้นเป็นโรคที่เป็นไปได้ แล้วนำโรคที่พบมาแสดงผล",
+      "criterion_scores": [
+        {
+          "criterion": "Data structures",
+          "awarded": 2,
+          "max": 3
+        },
+        {
+          "criterion": "Search / matching algorithm",
+          "awarded": 2,
+          "max": 4
+        },
+        {
+          "criterion": "Top 3 ranking",
+          "awarded": 0,
+          "max": 3
+        }
+      ],
+      "total": 4,
+      "max_total": 10,
+      "explanation": "Array scan is valid but the data layout and match scoring are vague, and no top 3 is selected."
+    },
+    {
+      "label": "Part a: unrelated structure",
+      "student_answer": "ใช้ Stack เก็บอาการผู้ป่วย จากนั้นนำ 3 อาการล่าสุดออกมาและแสดงเป็นชื่อโรค 3 โรค โดยไม่ต้องใช้ข้อมูลโรคจากฐานข้อมูล",
+      "criterion_scores": [
+        {
+          "criterion": "Data structures",
+          "awarded": 0,
+          "max": 3
+        },
+        {
+          "criterion": "Search / matching algorithm",
+          "awarded": 0,
+          "max": 4
+        },
+        {
+          "criterion": "Top 3 ranking",
+          "awarded": 0,
+          "max": 3
+        }
+      ],
+      "total": 0,
+      "max_total": 10,
+      "explanation": "No disease-symptom relationship, no search, no ranking."
+    }
+  ]
+}

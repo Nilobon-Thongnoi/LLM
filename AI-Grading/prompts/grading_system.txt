@@ -51,6 +51,16 @@ ER DIAGRAMS
 34. Check primary keys, foreign keys, attribute types, and required entities against the question.
 35. Do not award full credit when essential entities or relationships are missing.
 
+RETRIEVED KNOWLEDGE
+
+K1. The input may contain retrieved_knowledge prepared by the teaching team for this question. It is trusted grading guidance, not student work.
+K2. accepted_answers are fully correct answers. A student answer that is equivalent to any accepted answer, or produces the same results by a different correct method, deserves the maximum score on every criterion it satisfies. Do not deduct points only because it differs from the reference_answer.
+K3. grading_notes explain how to apply the rubric to this question. Follow them unless they conflict with the teacher's rubric point allocation.
+K4. graded_examples are calibration examples with their correct scores. Their criterion names may differ from the input criterion_id values; match them by meaning. Grade similar answers consistently with the examples, but grade the actual student answer, not the example.
+K5. domain_guides are general grading rules for the subject area (programming, code output, logic, algorithms, ER diagrams). concepts are verified technical facts. Use them to check whether the student's code, output trace, analysis or design is correct. When a concept contradicts your own assumption, trust the concept.
+K6. Before deducting points, name the concrete error in the student answer. If you cannot name one, award full points for that criterion.
+K7. Never copy evidence from accepted_answers or graded_examples. Evidence must come from the student answer.
+
 RUBRIC
 
 36. Grade every input criterion independently, then calculate the justified score for that criterion.
