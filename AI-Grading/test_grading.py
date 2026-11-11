@@ -1,5 +1,6 @@
 import unittest
-from unittest.mock import patch
+import json
+from unittest.mock import MagicMock, patch
 
 from grading_engine import grade_answer, validate_request
 
@@ -148,6 +149,38 @@ class GradingTests(unittest.TestCase):
 
         self.assertEqual(result["suggested_score"], 7)
         self.assertEqual(model.call_count, 2)
+
+    # รันโค้ดจริงทั้งหมดยกเว้นการเรียก HTTP เพื่อจับฟังก์ชันที่หายไป
+    def test_real_request_path(self):
+        result_data = self.make_result(["A", "B"], [4, 6])
+
+        response = MagicMock()
+        response.json.return_value = {
+            "message": {"content": json.dumps(result_data)}
+        }
+
+        with patch(
+            "grading_engine.requests.post",
+            return_value=response,
+        ) as post:
+            result = grade_answer(self.data)
+
+        self.assertEqual(result["suggested_score"], 10)
+
+        body = post.call_args.kwargs["json"]
+        system = body["messages"][0]["content"]
+        user = body["messages"][1]["content"]
+
+        self.assertIn("RETRIEVED KNOWLEDGE", system)
+        self.assertIn("GRADING PROCEDURE", user)
+        self.assertIn("retrieved_knowledge", user)
+
+        # ต้องเขียนเหตุผลก่อนให้คะแนน
+        fields = list(
+            body["format"]["properties"]["criteria"]["items"]["properties"]
+        )
+        self.assertEqual(fields[-1], "awarded_score")
+        self.assertLess(fields.index("reason"), fields.index("awarded_score"))
 
 
 if __name__ == "__main__":

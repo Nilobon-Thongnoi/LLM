@@ -43,8 +43,8 @@ def run_tests():
         result = hint.generate_hints(make_data())
 
         assert len(result["hints"]) == 3
-        assert result["status"] == "pending_review"
-        assert result["review_required"] is True
+        assert result["status"] == "generated"
+        assert result["review_required"] is False
 
         assert [
             item["source"] for item in result["hints"]
@@ -113,9 +113,13 @@ def run_tests():
         bad["is_descriptive"] = False
         expect_error(bad)
 
-        # ไม่อนุญาต Part 1
+        # exam_part ต้องเป็นจำนวนเต็มบวก (Part 1 ใช้ได้ตาม build_prompt)
         bad = make_data()
-        bad["exam_part"] = 1
+        bad["exam_part"] = 0
+        expect_error(bad)
+
+        bad = make_data()
+        bad["exam_part"] = "2"
         expect_error(bad)
 
         # Teacher Hint เกิน 300 ตัวอักษรไม่ได้
