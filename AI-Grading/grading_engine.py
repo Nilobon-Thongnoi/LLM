@@ -6,6 +6,8 @@ from pathlib import Path
 
 import requests
 
+from knowledge_base import retrieve_knowledge
+
 
 MODEL = os.getenv("GRADING_MODEL", "qwen3.5:9b")
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://127.0.0.1:11434/api/chat")
@@ -142,56 +144,8 @@ def get_result_schema():
     }
 
 
-def get_grading_instructions():
-    return (
-        "GRADING PROCEDURE:\n"
-        "1. Identify all explicit question requirements and subparts.\n"
-        "2. Break each rubric criterion into independently verifiable components.\n"
-        "3. For each component, check the actual submitted evidence.\n"
-        "4. Full points require all essential components to be correct.\n"
-        "5. Award partial points for actual correct work, even if other work fails.\n"
-        "6. Do not infer absent work or reward keywords alone.\n"
-        "7. Never penalize the same mistake repeatedly unless it separately "
-        "invalidates another rubric requirement.\n"
-        "8. Use the reference as guidance; correct alternatives are acceptable.\n"
-        "9. If the reference is missing, derive requirements from the question.\n"
-        "10. Preserve IDs, weights and teacher point allocations.\n"
-        "11. When a criterion has multiple parts, explain which parts passed.\n"
-        "12. Evidence, missing and reason must accurately match the code or answer.\n"
-        "13. Output concise Thai explanations; lower confidence if uncertain.\n\n"
-        "JAVASCRIPT FACTS:\n"
-        "JavaScript variable names are case-sensitive: cc and CC differ.\n"
-        "Math.round(301.5) is 302, an integer, NOT 301.5.\n"
-        "Math.round, Math.trunc and Math.floor all produce integer numbers "
-        "for finite inputs, but their rounding behavior differs.\n"
-        "Evaluate actual thresholds and arithmetic; 1200 * 1.5 = 1800.\n"
-        "Read all code before grading; distinguish function declaration, "
-        "parameter use, condition structure, calculation and output.\n"
-        "A present return statement is present even if some paths return undefined.\n"
-        "If console.log is accepted by the rubric, do not require return.\n"
-        "Do not give full execution credit to code with an undefined variable.\n"
-        "Do not automatically remove all conceptual partial credit for one typo.\n"
-        "Do not treat comments as implemented algorithms or calculations.\n"
-        "Do not claim code was executed or tests were run.\n\n"
-        "ALGORITHMS:\n"
-        "Check correctness, necessary steps, termination, Big-O and its reasoning "
-        "when requested. Missing steps cannot receive full credit.\n\n"
-        "ER DIAGRAMS:\n"
-        "Inspect actual JSON tables, field names, data types, keys, "
-        "relationship endpoints and cardinalities. Ignore visual coordinates.\n"
-        "Identify required entities and attributes from the question. "
-        "Missing necessary attributes or relationships reduce relevant points.\n"
-        "Accept valid equivalent designs. Never invent missing tables or links.\n\n"
-        "FINAL CHECK:\n"
-        "Check every factual statement and all arithmetic once again.\n"
-        "Do not claim a statement, variable or field is absent if it is present.\n"
-        "Do not claim an incomplete answer fully satisfies a broad criterion.\n"
-        "Return the required JSON only."
-    )
-
-
-# ส่งโจทย์ เฉลย คำตอบ และ Rubric ไปให้ Qwen
-def ask_ollama(data, criteria, rubric_status, correction=""):
+# ส่งคำตอบไปให้ Qwen ประเมินตาม Prompt
+def ask_ollama(data, criteria, rubric_status, correction="", knowledge=None):
     prompt = PROMPT_FILE.read_text(encoding="utf-8").strip()
     if not prompt:
         raise ValueError("Grading prompt is empty.")
@@ -205,6 +159,12 @@ def ask_ollama(data, criteria, rubric_status, correction=""):
         "rubric_status": rubric_status,
     }
 
+    if knowledge:
+        grading_data["retrieved_knowledge"] = knowledge
+
+    if correction:
+        grading_data["format_correction"] = correction
+
     user_message = (
         "Evaluate the student answer carefully.\n\n"
         + get_grading_instructions()
@@ -213,9 +173,13 @@ def ask_ollama(data, criteria, rubric_status, correction=""):
     )
     if correction:
         user_message += (
-            "\n\nYour previous result was rejected: " + correction
-            + "\nCorrect the factual mistake and re-evaluate all criteria. "
-            "Keep valid partial credit and do not fabricate evidence."
+            "\n\nThe previous grading result was rejected "
+            "because: " + correction
+            + "\nRe-evaluate the student answer. "
+            "Include all five fields for every criterion: "
+            "criterion_id, evidence, missing, reason, "
+            "and awarded_score. "
+            "Never invent evidence."
         )
 
     response = requests.post(
@@ -389,15 +353,34 @@ def grade_answer(data):
             "confidence": "high",
             "review_reasons": [],
             "rubric_status": rubric_status,
+            "knowledge_id": None,
         }
+
+    # ดึงคำตอบที่ถูก ตัวอย่างการให้คะแนน และความรู้ที่เกี่ยวข้อง (RAG)
+    knowledge = retrieve_knowledge(data)
 
     error_message = ""
     for attempt in range(2):
         try:
-            result = ask_ollama(data, criteria, rubric_status, error_message)
-            return check_result(
-                result, criteria, rubric_status, data["student_answer"]
+            result = ask_ollama(
+                data,
+                criteria,
+                rubric_status,
+                error_message,
+                knowledge=knowledge
             )
+
+            checked = check_result(
+                result,
+                criteria,
+                rubric_status,
+                data["student_answer"]
+            )
+
+            checked["knowledge_id"] = knowledge.get("question_id")
+
+            return checked
+
         except (ValueError, TypeError, KeyError) as error:
             error_message = str(error)
             if attempt == 1:

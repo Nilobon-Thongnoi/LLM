@@ -1,0 +1,258 @@
+{
+  "domain": "javascript",
+  "title": "JavaScript programming",
+  "detect": [
+    "javascript",
+    "function",
+    "ฟังก์ชัน",
+    "โปรแกรม",
+    "เขียนโปรแกรม",
+    "พารามิเตอร์",
+    "parameter",
+    "return",
+    "=>",
+    "let ",
+    "const ",
+    "var ",
+    "array",
+    "อาร์เรย์",
+    "object",
+    "loop",
+    "ลูป"
+  ],
+  "grading_guide": [
+    "Grade the behaviour of the code, not its style. Different names, formatting, loop types, if/else vs switch vs ternary, and helper functions are all acceptable when the results are the same.",
+    "Mentally run the student code on the question's example input and on boundary values (exact range limits, 0, empty input). Deduct only for inputs where the result is actually wrong.",
+    "A single small syntax slip (missing semicolon, one missing brace, a typo in one variable name) should not remove credit for otherwise correct logic unless the rubric requires runnable code.",
+    "If the question says return, console.log alone is weaker; if the rubric accepts display or return, both are full credit. Follow the rubric wording.",
+    "Do not give credit for code that only looks right: check operators, conditions, accumulation and the returned variable.",
+    "Code in another language than the one required should be flagged in review_reasons."
+  ],
+  "concepts": [
+    {
+      "id": "js-function-forms",
+      "keywords": [
+        "function",
+        "=>",
+        "arrow",
+        "ฟังก์ชัน"
+      ],
+      "text": "Function forms: function f(p) {...}, const f = function (p) {...}, and const f = (p) => {...} are all valid functions. An arrow function with an expression body (x => x * 2) returns that value without the return keyword. A function with no return statement returns undefined."
+    },
+    {
+      "id": "js-return-vs-log",
+      "keywords": [
+        "return",
+        "console.log",
+        "แสดงผล",
+        "คืนค่า"
+      ],
+      "text": "return gives the value back to the caller and ends the function; console.log only prints it and the function still returns undefined. Code after return in the same block never runs."
+    },
+    {
+      "id": "js-integer-conversion",
+      "keywords": [
+        "math.trunc",
+        "math.floor",
+        "math.round",
+        "math.ceil",
+        "parseint",
+        "tofixed",
+        "| 0",
+        "~~",
+        "integer",
+        "จำนวนเต็ม"
+      ],
+      "text": "Integer conversion: Math.trunc removes the fraction; Math.floor rounds down (same as trunc for positive numbers, different for negatives); Math.round rounds to nearest; Math.ceil rounds up; parseInt(x), x | 0 and ~~x truncate. All return numbers. toFixed(n) returns a STRING. Number.isInteger only checks. JavaScript has one Number type, so 'integer' means an integer-valued number."
+    },
+    {
+      "id": "js-division",
+      "keywords": [
+        "/",
+        "หาร",
+        "divide",
+        "%",
+        "mod",
+        "modulo"
+      ],
+      "text": "In JavaScript / is real division (7 / 2 = 3.5), there is no integer division operator; use Math.floor(7 / 2) for 3. % is the remainder and keeps the sign of the left operand (-7 % 2 = -1)."
+    },
+    {
+      "id": "js-equality-coercion",
+      "keywords": [
+        "==",
+        "===",
+        "!=",
+        "!==",
+        "coercion",
+        "typeof"
+      ],
+      "text": "=== compares without type conversion; == converts types first (0 == '0' is true, 0 === '0' is false, null == undefined is true). '5' + 1 is '51' (string concatenation) but '5' - 1 is 4. typeof null is 'object'. NaN === NaN is false; use Number.isNaN."
+    },
+    {
+      "id": "js-truthy-falsy",
+      "keywords": [
+        "truthy",
+        "falsy",
+        "if (",
+        "while (",
+        "!"
+      ],
+      "text": "Falsy values are false, 0, -0, '', null, undefined and NaN. Everything else is truthy, including '0', [] and {}."
+    },
+    {
+      "id": "js-scope",
+      "keywords": [
+        "var ",
+        "let ",
+        "const ",
+        "scope",
+        "hoisting"
+      ],
+      "text": "let and const are block scoped; var is function scoped and hoisted (reads before the assignment give undefined). Reading a let/const before its declaration throws ReferenceError. const prevents reassignment but an object or array held in a const can still be modified."
+    },
+    {
+      "id": "js-loops",
+      "keywords": [
+        "for (",
+        "for(",
+        "while",
+        "do {",
+        "for...of",
+        "for...in",
+        " of ",
+        " in ",
+        "break",
+        "continue",
+        "ลูป",
+        "loop"
+      ],
+      "text": "for (init; cond; step) checks cond before every iteration. while checks before, do...while runs at least once. for...of iterates values of an array or string; for...in iterates keys (array indices as strings). break leaves the nearest loop; continue skips to the next iteration. Watch for off-by-one errors (< vs <=, starting at 0 vs 1)."
+    },
+    {
+      "id": "js-switch",
+      "keywords": [
+        "switch",
+        "case",
+        "default",
+        "break"
+      ],
+      "text": "switch compares with ===. Execution starts at the first matching case and falls through into later cases until break or the end. switch (true) { case cond: ... } runs the first case whose condition is true and is equivalent to an if / else if chain."
+    },
+    {
+      "id": "js-arrays",
+      "keywords": [
+        "push",
+        "pop",
+        "shift",
+        "unshift",
+        "slice",
+        "splice",
+        ".length",
+        "array",
+        "อาร์เรย์",
+        "indexof",
+        "includes"
+      ],
+      "text": "Arrays: push/pop work at the end, unshift/shift at the start (all modify the array). slice(a, b) copies indices a..b-1 without modifying; splice modifies. length is last index + 1. indexOf returns -1 when not found; includes returns a boolean."
+    },
+    {
+      "id": "js-array-higher-order",
+      "keywords": [
+        "map",
+        "filter",
+        "reduce",
+        "foreach",
+        "find",
+        "some",
+        "every"
+      ],
+      "text": "map returns a new array of the same length; filter returns the matching elements; reduce((acc, x) => ..., init) folds to one value (without init it starts from the first element); forEach returns undefined; find returns the first match or undefined; some/every return booleans."
+    },
+    {
+      "id": "js-sort",
+      "keywords": [
+        "sort",
+        "เรียง",
+        "compare"
+      ],
+      "text": "array.sort() without a compare function sorts as strings ([10, 9, 1].sort() gives [1, 10, 9]). Numeric ascending needs sort((a, b) => a - b); descending b - a. sort modifies the original array."
+    },
+    {
+      "id": "js-strings",
+      "keywords": [
+        "string",
+        "split",
+        "join",
+        "substring",
+        "charat",
+        "touppercase",
+        "tolowercase",
+        "trim",
+        "template",
+        "`",
+        "ข้อความ"
+      ],
+      "text": "Strings are immutable; methods return new strings. split(sep) gives an array, join(sep) builds a string. str.length counts UTF-16 units. Template literals `${x}` insert values. s[i] and s.charAt(i) read one character."
+    },
+    {
+      "id": "js-objects",
+      "keywords": [
+        "object",
+        "obj.",
+        "[\"",
+        "['",
+        "property",
+        "this.",
+        "object.keys"
+      ],
+      "text": "obj.key and obj['key'] read the property named key; obj[k] uses the VALUE of variable k as the property name. Missing properties give undefined. Object.keys / Object.values / Object.entries list own properties."
+    },
+    {
+      "id": "js-float-precision",
+      "keywords": [
+        "0.1",
+        "0.2",
+        "decimal",
+        "ทศนิยม",
+        "float",
+        "precision"
+      ],
+      "text": "Floating point: 0.1 + 0.2 is 0.30000000000000004. Multiplying by .5 or 1.5 on integers is exact enough for normal exam values; small float noise is not a logic error."
+    },
+    {
+      "id": "js-recursion",
+      "keywords": [
+        "recursion",
+        "recursive",
+        "เรียกตัวเอง",
+        "factorial",
+        "fibonacci"
+      ],
+      "text": "A recursive function needs a base case that stops the recursion and a recursive call that moves toward it. Missing or unreachable base cases cause infinite recursion (stack overflow)."
+    },
+    {
+      "id": "js-input-validation",
+      "keywords": [
+        "validate",
+        "ตรวจสอบ",
+        "isnan",
+        "number(",
+        "negative",
+        "ติดลบ"
+      ],
+      "text": "Input validation (negative numbers, non-numbers) is only required when the question asks for it. Do not deduct for missing validation the question never mentioned; extra validation is acceptable."
+    },
+    {
+      "id": "js-folded-constants",
+      "keywords": [
+        "constant",
+        "ค่าคงที่",
+        "สูตร",
+        "formula",
+        "คำนวณ"
+      ],
+      "text": "A pre-computed constant equals the expression it replaces (for example 300 + 1800 written as 2100). Formulas with folded constants, reordered terms or extra parentheses are equally correct if the arithmetic is the same."
+    }
+  ]
+}

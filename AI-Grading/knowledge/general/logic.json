@@ -1,0 +1,112 @@
+{
+  "domain": "logic",
+  "title": "Logic and conditions",
+  "detect": [
+    "เงื่อนไข",
+    "condition",
+    "if",
+    "else",
+    "&&",
+    "||",
+    "and",
+    "or",
+    "not",
+    "boolean",
+    "true",
+    "false",
+    "ตรรกะ",
+    "logic",
+    "truth table",
+    "ตารางความจริง",
+    "ช่วง",
+    "range"
+  ],
+  "grading_guide": [
+    "Check every branch of the student's conditions, including exact boundary values (e.g. 600 and 601 when ranges are 1-600 / 601-1800).",
+    "Different but equivalent conditions are correct: reversed order (largest range first), x > 600 instead of x >= 601 for integers, separate if statements with && ranges, or switch(true).",
+    "Deduct for a boundary only when a concrete input actually lands in the wrong branch.",
+    "Conditions in an else-if chain are evaluated in order; later conditions only see inputs that failed earlier ones, so they may be written shorter."
+  ],
+  "concepts": [
+    {
+      "id": "logic-precedence",
+      "keywords": [
+        "&&",
+        "||",
+        "!",
+        "and",
+        "or",
+        "not"
+      ],
+      "text": "Operator precedence: ! binds tightest, then &&, then ||. a || b && c means a || (b && c). Comparison operators (<, ===) bind tighter than && and ||."
+    },
+    {
+      "id": "logic-short-circuit",
+      "keywords": [
+        "&&",
+        "||",
+        "??",
+        "short"
+      ],
+      "text": "&& stops at the first falsy operand and returns it; || stops at the first truthy operand and returns it. ?? returns the right side only when the left is null or undefined."
+    },
+    {
+      "id": "logic-de-morgan",
+      "keywords": [
+        "!(",
+        "de morgan",
+        "not"
+      ],
+      "text": "De Morgan: !(a && b) equals !a || !b, and !(a || b) equals !a && !b. false && anything is false; true || anything is true."
+    },
+    {
+      "id": "logic-chained-comparison",
+      "keywords": [
+        "chained",
+        "< x <",
+        "<x<"
+      ],
+      "text": "JavaScript does not support math-style chains: 1 < x < 10 is evaluated as (1 < x) < 10, which is always true because the boolean becomes 0 or 1. A correct range check is x > 1 && x < 10."
+    },
+    {
+      "id": "logic-boundaries",
+      "keywords": [
+        "<=",
+        ">=",
+        "ช่วง",
+        "range",
+        "ตั้งแต่",
+        "ขึ้นไป"
+      ],
+      "text": "Ranges like '1-600' and '601-1800' are inclusive. For integer inputs, x <= 600 equals x < 601 and x > 600 equals x >= 601. Using < 600 instead of <= 600 misplaces exactly x = 600."
+    },
+    {
+      "id": "logic-else-if-chain",
+      "keywords": [
+        "else if",
+        "elif",
+        "else"
+      ],
+      "text": "In if / else if / else only the first true branch runs. Separate if statements can run several branches, which is only correct when the conditions are mutually exclusive. A dangling else belongs to the nearest unmatched if."
+    },
+    {
+      "id": "logic-even-odd",
+      "keywords": [
+        "% 2",
+        "คู่",
+        "คี่",
+        "even",
+        "odd"
+      ],
+      "text": "n % 2 === 0 tests even. For negative odd numbers n % 2 is -1, so n % 2 === 1 misses them; n % 2 !== 0 tests odd for all integers."
+    },
+    {
+      "id": "logic-ternary",
+      "keywords": [
+        " ? ",
+        "ternary"
+      ],
+      "text": "cond ? a : b is an expression equal to a when cond is truthy, otherwise b. Nested ternaries are equivalent to an else-if chain."
+    }
+  ]
+}

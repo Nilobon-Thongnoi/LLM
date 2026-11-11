@@ -1,0 +1,107 @@
+{
+  "domain": "code_snippet",
+  "title": "Code snippet output tracing",
+  "detect": [
+    "ผลลัพธ์",
+    "output",
+    "snippet",
+    "code snippets",
+    "ส่วนของโปรแกรม",
+    "ประมวลผล",
+    "แสดงผลอะไร",
+    "พิมพ์อะไร",
+    "console.log",
+    "what is printed",
+    "trace"
+  ],
+  "grading_guide": [
+    "The answer is the program output. Compare each printed line with the true output: values, order and number of lines all matter.",
+    "Trace the code yourself step by step before grading. Do not trust the reference answer or the student blindly.",
+    "Accept harmless formatting differences: extra spaces, line breaks written as commas, quotes around strings, and Node vs browser array formatting ([ 1, 2 ] vs [1, 2]).",
+    "Explanations are not required unless the question asks for them. A correct output with no explanation earns full credit.",
+    "A wrong number, missing line, extra line or wrong order is an error even if it looks similar. Award partial credit per correct line when the rubric allows it.",
+    "A correct explanation of the execution with a small slip in one value can earn partial credit."
+  ],
+  "concepts": [
+    {
+      "id": "snip-console-log",
+      "keywords": [
+        "console.log"
+      ],
+      "text": "Each console.log call prints one line. console.log(a, b) prints the values separated by a space. console.log of an array prints its elements (Node: [ 1, 2, 3 ]); of an object prints its properties; of a function call prints that function's return value (undefined if none)."
+    },
+    {
+      "id": "snip-loop-trace",
+      "keywords": [
+        "for (",
+        "for(",
+        "while",
+        "i++",
+        "i--",
+        "++",
+        "--"
+      ],
+      "text": "Trace loops with a table of variable values per iteration. i++ returns the old value then increments; ++i increments first. A for loop's condition is checked before each iteration, so for (i = 0; i < 3; i++) runs with i = 0, 1, 2."
+    },
+    {
+      "id": "snip-nested-loops",
+      "keywords": [
+        "nested",
+        "j++",
+        "j <",
+        "j<="
+      ],
+      "text": "In nested loops the inner loop runs completely for every value of the outer loop. Output order is all inner values for the first outer value, then for the second, and so on."
+    },
+    {
+      "id": "snip-break-continue",
+      "keywords": [
+        "break",
+        "continue"
+      ],
+      "text": "break exits the nearest enclosing loop or switch immediately, so nothing after it in that loop prints. continue skips the rest of the current iteration only."
+    },
+    {
+      "id": "snip-switch-fallthrough",
+      "keywords": [
+        "switch",
+        "case",
+        "default"
+      ],
+      "text": "switch without break falls through: after the matching case, every following case body and default also run. switch (1) with cases 0, 1, 2, default and no breaks prints the bodies of case 1, case 2 and default."
+    },
+    {
+      "id": "snip-bracket-access",
+      "keywords": [
+        "[key]",
+        "bracket",
+        "[\"",
+        "['"
+      ],
+      "text": "obj[key] where key is a variable reads the property named by key's value, not the literal property 'key'. obj['key'] with quotes reads the literal property."
+    },
+    {
+      "id": "snip-closures-timers",
+      "keywords": [
+        "settimeout",
+        "var i",
+        "closure",
+        "async",
+        "promise",
+        "then"
+      ],
+      "text": "With var, a loop variable is shared, so callbacks run later (setTimeout) all see the final value (for var i < 3 prints 3 3 3); with let each iteration has its own binding (prints 0 1 2). Synchronous code prints before setTimeout callbacks and before promise .then callbacks; .then callbacks run before setTimeout callbacks."
+    },
+    {
+      "id": "snip-string-number",
+      "keywords": [
+        "+ '",
+        "' +",
+        "+ \"",
+        "\" +",
+        "concat"
+      ],
+      "text": "+ with any string operand concatenates: 1 + 2 + '3' is '33' but '1' + 2 + 3 is '123'. Other arithmetic operators convert strings to numbers."
+    }
+  ]
+}
