@@ -95,13 +95,9 @@
       "id": "alg-pseudocode-control",
       "keywords": [
         "pseudocode",
+        "pseudo code",
         "รหัสเทียม",
-        "if",
-        "for",
-        "while",
-        "repeat until",
-        "case",
-        "sequence"
+        "repeat until"
       ],
       "text": "Pseudocode expresses steps without dependence on a programming language. Common control structures are sequence, selection (IF/ELSE, CASE), and repetition (FOR, WHILE, REPEAT UNTIL); functions or procedures can be called. Clear input/output, loop bounds, updates, termination and return values matter more than syntax details."
     },
@@ -173,10 +169,9 @@
     {
       "id": "alg-loop-analysis",
       "keywords": [
-        "loop",
         "nested loop",
-        "for",
-        "while",
+        "ลูปซ้อน",
+        "loop",
         "iteration",
         "sumarray"
       ],
@@ -187,7 +182,6 @@
       "keywords": [
         "findmax",
         "maximum",
-        "max",
         "ค่าสูงสุด"
       ],
       "text": "FindMax on a nonempty unsorted array initializes max=A[0], scans remaining elements, updates max when a larger value appears, and returns max. It uses Θ(n) time in best, average and worst cases and O(1) auxiliary space. Without a nonempty-input precondition, empty input must be handled explicitly."
@@ -198,9 +192,8 @@
         "sumarray",
         "sumwithloop",
         "sumwithformula",
-        "even",
-        "odd",
-        "modulo"
+        "parity",
+        "n(n+1)/2"
       ],
       "text": "Parity testing x mod 2 is Θ(1) for fixed-width integers. Summing n array entries with a loop is Θ(n) time and O(1) auxiliary space. Computing 1+2+...+n with n(n+1)/2 is O(1) arithmetic operations under the usual fixed-width arithmetic model; if arbitrary-precision arithmetic is relevant, state the model."
     },
@@ -228,8 +221,7 @@
       "keywords": [
         "binary search",
         "ค้นหาแบบทวิภาค",
-        "divide and conquer",
-        "mid"
+        "divide and conquer"
       ],
       "text": "Binary search requires sorted data and repeatedly compares the target with a middle element, discarding half the remaining interval. Best case Θ(1), worst and typical average Θ(log n). Iterative binary search uses O(1) auxiliary space; recursive binary search uses O(log n) stack space. Update low/high correctly and handle not-found cases."
     },
@@ -239,10 +231,9 @@
         "hash",
         "hash table",
         "hashmap",
-        "collision",
-        "dictionary",
         "hash map",
-        "set"
+        "collision",
+        "dictionary"
       ],
       "text": "A hash table maps keys to buckets for average O(1) lookup, insertion and deletion under appropriate hashing and load-factor assumptions. Collisions may degrade worst-case lookup to O(n). A method relying on a hash table should state whether its complexity is expected/average rather than guaranteed worst case. Building a hash index from n items takes O(n) expected time."
     },
@@ -262,8 +253,7 @@
       "keywords": [
         "gcd",
         "euclid",
-        "หารร่วมมาก",
-        "mod"
+        "หารร่วมมาก"
       ],
       "text": "Euclid's algorithm computes gcd(a,b) using gcd(b, a mod b) until b=0; the answer is the remaining a (for nonnegative inputs). It requires logarithmically many iterations relative to the smaller positive operand in the standard arithmetic-operation model, with O(1) auxiliary space iteratively."
     },
@@ -509,10 +499,10 @@
       "keywords": [
         "heap",
         "priority queue",
-        "top",
-        "อันดับ",
         "top 3",
         "top-k",
+        "top k",
+        "อันดับ",
         "k อันดับ"
       ],
       "text": "Top-k selection: sorting all n items costs O(n log n); a size-k min-heap costs O(n log k), which is O(n) when k is a constant such as 3; k linear scans also give O(k * n) = O(n) for constant k. Taking the first k after an ascending sort returns the SMALLEST scores."

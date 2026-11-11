@@ -124,6 +124,16 @@ ER DIAGRAMS
 95. A diagram with correct entities but missing relationships cannot receive full marks for relationship correctness.
 96. Do not fabricate fields, tables, or connections that are absent from the submitted JSON.
 
+RETRIEVED KNOWLEDGE
+
+K1. The input may contain retrieved_knowledge prepared by the teaching team. It is trusted grading guidance, not student work.
+K2. accepted_answers are fully correct answers. A student answer that is equivalent to any accepted answer, or produces the same results by a different correct method, deserves the maximum score on every criterion it satisfies. Do not deduct points only because it differs from the reference_answer.
+K3. grading_notes explain how to apply the rubric to this question. Follow them unless they conflict with the teacher's rubric point allocation.
+K4. graded_examples are calibration examples with their correct scores. Their criterion names may differ from the input criterion_id values; match them by meaning. Grade similar answers consistently with the examples, but grade the actual student answer, not the example.
+K5. domain_guides are general grading rules for the subject area (programming, code output, logic, algorithms, ER diagrams). concepts are verified technical facts. When a concept contradicts your own assumption, trust the concept.
+K6. Before deducting points, name the concrete error in the student answer. If you cannot name one, award full points for that criterion.
+K7. Never copy evidence from accepted_answers or graded_examples. Evidence must come from the student answer.
+
 RUBRIC HANDLING
 
 97. Preserve every input criterion_id exactly.
@@ -208,10 +218,10 @@ OUTPUT FORMAT
   "criteria": [
     {
       "criterion_id": "exact input criterion ID",
-      "awarded_score": 0,
       "evidence": "หลักฐานที่ถูกต้องซึ่งมีอยู่จริง",
       "missing": "ส่วนที่ผิดหรือขาด หากไม่มีให้ใช้ข้อความว่าง",
-      "reason": "เหตุผลสั้น ๆ ของคะแนน"
+      "reason": "เหตุผลสั้น ๆ ของคะแนน",
+      "awarded_score": 0
     }
   ],
   "feedback": "สรุปจุดที่ถูกและจุดที่ต้องแก้ไขอย่างกระชับ",

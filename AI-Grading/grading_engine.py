@@ -115,14 +115,15 @@ def get_result_schema():
     criterion = {
         "type": "object",
         "properties": {
+            # ให้เขียนหลักฐานและเหตุผลก่อน แล้วจึงให้คะแนน
             "criterion_id": {"type": "string"},
-            "awarded_score": {"type": "number"},
             "evidence": {"type": "string"},
             "missing": {"type": "string"},
             "reason": {"type": "string"},
+            "awarded_score": {"type": "number"},
         },
         "required": [
-            "criterion_id", "awarded_score", "evidence", "missing", "reason"
+            "criterion_id", "evidence", "missing", "reason", "awarded_score"
         ],
     }
     return {
@@ -142,6 +143,54 @@ def get_result_schema():
             "criteria", "feedback", "confidence", "review_reasons"
         ],
     }
+
+
+def get_grading_instructions():
+    return (
+        "GRADING PROCEDURE:\n"
+        "1. Identify all explicit question requirements and subparts.\n"
+        "2. Break each rubric criterion into independently verifiable components.\n"
+        "3. For each component, check the actual submitted evidence.\n"
+        "4. Full points require all essential components to be correct.\n"
+        "5. Award partial points for actual correct work, even if other work fails.\n"
+        "6. Do not infer absent work or reward keywords alone.\n"
+        "7. Never penalize the same mistake repeatedly unless it separately "
+        "invalidates another rubric requirement.\n"
+        "8. Use the reference as guidance; correct alternatives are acceptable.\n"
+        "9. If the reference is missing, derive requirements from the question.\n"
+        "10. Preserve IDs, weights and teacher point allocations.\n"
+        "11. When a criterion has multiple parts, explain which parts passed.\n"
+        "12. Evidence, missing and reason must accurately match the code or answer.\n"
+        "13. Output concise Thai explanations; lower confidence if uncertain.\n\n"
+        "JAVASCRIPT FACTS:\n"
+        "JavaScript variable names are case-sensitive: cc and CC differ.\n"
+        "Math.round(301.5) is 302, an integer, NOT 301.5.\n"
+        "Math.round, Math.trunc and Math.floor all produce integer numbers "
+        "for finite inputs, but their rounding behavior differs.\n"
+        "Evaluate actual thresholds and arithmetic; 1200 * 1.5 = 1800.\n"
+        "Read all code before grading; distinguish function declaration, "
+        "parameter use, condition structure, calculation and output.\n"
+        "A present return statement is present even if some paths return undefined.\n"
+        "If console.log is accepted by the rubric, do not require return.\n"
+        "Do not give full execution credit to code with an undefined variable.\n"
+        "Do not automatically remove all conceptual partial credit for one typo.\n"
+        "Do not treat comments as implemented algorithms or calculations.\n"
+        "Do not claim code was executed or tests were run.\n\n"
+        "ALGORITHMS:\n"
+        "Check correctness, necessary steps, termination, Big-O and its reasoning "
+        "when requested. Missing steps cannot receive full credit.\n\n"
+        "ER DIAGRAMS:\n"
+        "Inspect actual JSON tables, field names, data types, keys, "
+        "relationship endpoints and cardinalities. Ignore visual coordinates.\n"
+        "Identify required entities and attributes from the question. "
+        "Missing necessary attributes or relationships reduce relevant points.\n"
+        "Accept valid equivalent designs. Never invent missing tables or links.\n\n"
+        "FINAL CHECK:\n"
+        "Check every factual statement and all arithmetic once again.\n"
+        "Do not claim a statement, variable or field is absent if it is present.\n"
+        "Do not claim an incomplete answer fully satisfies a broad criterion.\n"
+        "Return the required JSON only."
+    )
 
 
 # ส่งคำตอบไปให้ Qwen ประเมินตาม Prompt
