@@ -18,6 +18,14 @@
     }
   ],
   "grading_notes": [
+    "TEACHER RULES (official for this question). C1 (4): 2 for declaring a function + 2 for a single parameter that receives cc and is actually used. A parameter that is declared but never used (e.g. code uses CC while the parameter is cc) gets 0 of the parameter 2.",
+    "C2 (6): 2 per case (<=600, 601-1800, >1800). A case with no condition or branch handling it gets 0 for that case. Count only branches that are really in the code: if there is no branch for cc > 1800, C2 is at most 4.",
+    "C3 (6): 2 per case. Check each case by plugging in the test values and computing what THIS code returns; if the result is wrong for that case, that case gets 0. Correct values: 500->250, 600->300, 601->301.5 (301 or 302 also correct), 1800->2100, 1801->2104, 2000->2900. Case <=600 uses 500 and 600; case 601-1800 uses 601 and 1800; case >1800 uses 1801 and 2000. A missing branch returns undefined or 0, which is wrong.",
+    "Before writing C3, compute the six test values for the student's code step by step and quote the formula exactly as it appears in the student code. Never describe a formula that is not in the code.",
+    "A loop that adds the rate for every single cc (for i = 1..cc: add 0.5 / 1.5 / 4 depending on i) is a correct progressive calculation: it gives 250, 300, 301.5, 2100, 2104, 2900. Give full C2 and C3 for it.",
+    "C4 (2): return or console.log of the result both count as output.",
+    "C5 (2): parseInt, Math.round, Math.floor and Math.trunc all count as converting to integer. No conversion at all gives 0.",
+    "The teacher's switch reference answer counts as correct by intent; grade similar switch answers by intent, not by run results.",
     "Both accepted answers are fully correct and earn the maximum score. Any other JavaScript solution that gives the same results for every CC value is also fully correct.",
     "2100 is the same as 300 + 1800 (tax of the first two tiers). Writing 2100, 300 + 1800, or calculating each tier separately and adding them are all correct.",
     "Conditions may be written as cc <= 600 / cc <= 1800 / else, as cc > 1800 / cc > 600 / else (reverse order), as ranges with && , or with switch(true). All handle the three ranges correctly.",

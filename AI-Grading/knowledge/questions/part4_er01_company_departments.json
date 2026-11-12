@@ -17,6 +17,12 @@
     }
   ],
   "grading_notes": [
+    "PARTIAL CREDIT IS REQUIRED. Each criterion is a sum of independent parts. A criterion is never all-or-nothing: an incomplete design earns the parts it does have. Give 0 only when none of the parts are present.",
+    "Criterion 1, tables (10) = 2 each: Department; Employee; Employee Type (separate table OR a type column in Employee); Office; a Department-Office many-to-many link (junction table). Example: a design with only Department and Office earns 4/10.",
+    "Criterion 2, fields and data types (10) = 2 each: Department has an id and a name; Employee has an id and a name; employment type is recorded; Office has an id, a name/address AND a way to mark the head office (only 1 of 2 if the head-office marker is missing); primary keys, foreign keys and data types are appropriate (1 of 2 if PKs and types are fine but no FKs). Only score tables that exist.",
+    "Criterion 3, relationships and cardinality (8) = 2 each: Department-Employee 1:M; Employee Type-Employee 1:M (or a type column); Department-Office M:N through a junction table (a direct 1:M Department-Office line is the right pair with the wrong cardinality: 1 of 2); overall cardinality/FK consistency of the drawn relationships (0 if there are no FKs at all).",
+    "Criterion 4, additional useful fields (2): 2 = useful extra fields beyond the minimum (email, hire_date, phone, salary, description); 1 = one weakly useful extra field; 0 = only the minimum fields. office_address counts as a required Office detail, not an extra field.",
+    "A table whose name is empty but whose fields are clearly about one entity (office_id, office_name, office_address) counts as that entity (Office). Do not give 0 for a missing table name; it is a minor naming issue.",
     "Grade by meaning, not by names or layout. Ignore diagram coordinates and random element ids in the JSON.",
     "Required concepts: department, employee, employee type (table or column), office, a way to mark the head office, and a department-office many-to-many link.",
     "Department-Office must be M:N (junction table). A 1:1 or 1:M Department-Office relationship contradicts the requirement that a department can be in many offices.",

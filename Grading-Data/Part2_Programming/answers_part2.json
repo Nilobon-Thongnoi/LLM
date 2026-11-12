@@ -1,22 +1,286 @@
 [
-  {"answer_id": "s01", "answer_text": "function calTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 600 * 0.5 + (cc - 600) * 1.5;\n    } else {\n        tax = 600 * 0.5 + 1200 * 1.5 + (cc - 1800) * 4;\n    }\n\n    return Math.round(tax);\n}\nconsole.log(calTax(2000));", "human_score": null, "human_criteria": null, "note": ""},
-  {"answer_id": "s02", "answer_text": "function carTax(cc) {\n    let tax = 0;\n\n    for (let i = 1; i <= cc; i++) {\n        if (i <= 600) {\n            tax += 0.5;\n        } else if (i <= 1800) {\n            tax += 1.5;\n        } else {\n            tax += 4;\n        }\n    }\n\n    return Math.round(tax);\n}", "human_score": null, "human_criteria": null, "note": "เหมือน s03 ทุกตัวอักษร (ใช้ทดสอบความนิ่ง)"},
-  {"answer_id": "s03", "answer_text": "function carTax(cc) {\n    let tax = 0;\n\n    for (let i = 1; i <= cc; i++) {\n        if (i <= 600) {\n            tax += 0.5;\n        } else if (i <= 1800) {\n            tax += 1.5;\n        } else {\n            tax += 4;\n        }\n    }\n    return Math.round(tax);\n}", "human_score": null, "human_criteria": null, "note": "เหมือน s02 (ต่างแค่บรรทัดว่าง)"},
-  {"answer_id": "s04", "answer_text": "function taxCar(cc) {\n    if (cc <= 600) {\n        return Math.round(cc * 0.5);\n    }\n\n    if (cc <= 1800) {\n        return Math.round(300 + (cc - 600) * 1.5);\n    }\n    return Math.round(2100 + (cc - 1800) * 4);\n}", "human_score": null, "human_criteria": null, "note": ""},
-  {"answer_id": "s05", "answer_text": "function calculateCarTax(cc) {\n    const first = Math.min(cc, 600) * 0.5;\n    const second = Math.min(Math.max(cc - 600, 0), 1200) * 1.5;\n    const third = Math.max(cc - 1800, 0) * 4;\n\n    return Math.round(first + second + third);\n}", "human_score": null, "human_criteria": null, "note": ""},
-  {"answer_id": "s06", "answer_text": "function getTax(cc) {\n    let result = 0;\n\n    result = cc <= 600\n        ? cc * 0.5\n        : cc <= 1800\n            ? 300 + (cc - 600) * 1.5\n            : 2100 + (cc - 1800) * 4;\n\n    return parseInt(Math.round(result));\n}", "human_score": null, "human_criteria": null, "note": ""},
-  {"answer_id": "s07", "answer_text": "function calTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 300 + (cc - 600) * 1.5;\n    } else {\n        tax = cc * 4;\n    }\n    return tax;\n}", "human_score": null, "human_criteria": null, "note": ""},
-  {"answer_id": "s08", "answer_text": "function calculateTax(cc) {\n    let rate;\n\n    if (cc <= 600) {\n        rate = 0.5;\n    } else if (cc <= 1800) {\n        rate = 1.5;\n    } else {\n        rate = 4;\n    }\n    return Math.round(cc * rate);\n}", "human_score": null, "human_criteria": null, "note": ""},
-  {"answer_id": "s09", "answer_text": "function carTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = (cc - 600) * 1.5;\n    } else {\n        tax = (cc - 1800) * 4;\n    }\n    return Math.round(tax);\n}", "human_score": null, "human_criteria": null, "note": ""},
-  {"answer_id": "s10", "answer_text": "function taxCalculate(cc) {\n    let tax = 300;\n\n    if (cc <= 600) {\n        tax = 300;\n    } else if (cc <= 1800) {\n        tax = 300 + (cc - 600) * 1.5;\n    } else {\n        tax = 300 + 1200 * 1.5 + (cc - 1800) * 4;\n    }\n    return Math.round(tax);\n}", "human_score": null, "human_criteria": null, "note": "กรณี <=600 คืนค่า 300 คงที่ (ผิดเมื่อ cc < 600)"},
-  {"answer_id": "s11", "answer_text": "function calculateVehicleTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 300 + (cc - 600) * 1.5;\n    } else {\n        tax = (cc - 1800) * 4;\n    }\n    return Math.round(tax);\n}", "human_score": null, "human_criteria": null, "note": ""},
-  {"answer_id": "s12", "answer_text": "function calVehicleTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 300 + cc * 1.5;\n    } else {\n        tax = 300 + 1200 * 1.5 + (cc - 1800) * 4;\n    }\n    return Math.round(tax);\n}", "human_score": null, "human_criteria": null, "note": ""},
-  {"answer_id": "s13", "answer_text": "function carTax(cc) {\n    let tax;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 300 + (cc - 600) * 1.5;\n    }\n    return tax;\n}", "human_score": null, "human_criteria": null, "note": "ไม่มีกรณี >1800 และไม่แปลงเป็น integer"},
-  {"answer_id": "s14", "answer_text": "function calculateTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 300 + (cc - 600) * 1.5;\n    } else {\n        tax = 2100 + (cc - 1800) * 4;\n\n    return Math.round(tax);\n}", "human_score": null, "human_criteria": null, "note": "ขาดวงเล็บปิดของ else (syntax) แต่ตรรกะถูก"},
-  {"answer_id": "s15", "answer_text": "function taxCar(cc) {\n    let tax = 0;\n\n    if (CC <= 600) {\n        tax = CC * 0.5;\n    } else {\n        tax = 300 + (CC - 600) * 1.5;\n    }\n    return tax;\n}", "human_score": null, "human_criteria": null, "note": "ใช้ CC แทน cc, ไม่มีกรณี >1800, ไม่แปลงเป็น integer"},
-  {"answer_id": "s16", "answer_text": "function getCarTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 300 + (cc - 600) * 1.5;\n    } else {\n        tax = 2100 + (cc - 1800) * 4;\n    }\n\n    console.log(Math.round(tax));\n}\nlet result = getCarTax(2000);", "human_score": null, "human_criteria": null, "note": "ใช้ console.log แทน return"},
-  {"answer_id": "s17", "answer_text": "function calculateTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    }\n\n    if (cc > 600) {\n        tax = cc * 1.5;\n    }\n\n    if (cc > 1800) {\n        tax = cc * 4;\n    }\n\n    return tax;\n}", "human_score": null, "human_criteria": null, "note": ""},
-  {"answer_id": "s18", "answer_text": "function carTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc / 2;\n    } else if (cc <= 1800) {\n        tax = 600 / 2 + (cc / 2) * 1.5;\n    } else {\n        tax = cc * 4;\n    }\n\n    return Math.round(tax);\n}", "human_score": null, "human_criteria": null, "note": ""},
-  {"answer_id": "s19", "answer_text": "function tax(cc) {\n    let result = 0;\n\n    if (cc <= 600) {\n        result = cc * 0.5;\n    } else if (cc <= 1800) {\n        result = 300;\n        // calculate next cc\n    } else {\n        // calculate more than 1800 cc\n    }\n\n    return result;\n}", "human_score": null, "human_criteria": null, "note": "กรณี 2 และ 3 ยังไม่เสร็จ (มีแต่ comment)"},
-  {"answer_id": "s20", "answer_text": "function calTax(cc) {\n    return Math.round(cc * 0.5);\n}\n\nconsole.log(calTax(2000));", "human_score": null, "human_criteria": null, "note": "ไม่มีเงื่อนไข ใช้อัตราเดียว"}
+  {
+    "answer_id": "s01",
+    "answer_text": "function calTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 600 * 0.5 + (cc - 600) * 1.5;\n    } else {\n        tax = 600 * 0.5 + 1200 * 1.5 + (cc - 1800) * 4;\n    }\n\n    return Math.round(tax);\n}\nconsole.log(calTax(2000));",
+    "human_score": 20,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 6,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s02",
+    "answer_text": "function carTax(cc) {\n    let tax = 0;\n\n    for (let i = 1; i <= cc; i++) {\n        if (i <= 600) {\n            tax += 0.5;\n        } else if (i <= 1800) {\n            tax += 1.5;\n        } else {\n            tax += 4;\n        }\n    }\n\n    return Math.round(tax);\n}",
+    "human_score": 20,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 6,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "เหมือน s03 ทุกตัวอักษร (ใช้ทดสอบความนิ่ง)",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s03",
+    "answer_text": "function carTax(cc) {\n    let tax = 0;\n\n    for (let i = 1; i <= cc; i++) {\n        if (i <= 600) {\n            tax += 0.5;\n        } else if (i <= 1800) {\n            tax += 1.5;\n        } else {\n            tax += 4;\n        }\n    }\n    return Math.round(tax);\n}",
+    "human_score": 20,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 6,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "เหมือน s02 (ต่างแค่บรรทัดว่าง)",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s04",
+    "answer_text": "function taxCar(cc) {\n    if (cc <= 600) {\n        return Math.round(cc * 0.5);\n    }\n\n    if (cc <= 1800) {\n        return Math.round(300 + (cc - 600) * 1.5);\n    }\n    return Math.round(2100 + (cc - 1800) * 4);\n}",
+    "human_score": 20,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 6,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s05",
+    "answer_text": "function calculateCarTax(cc) {\n    const first = Math.min(cc, 600) * 0.5;\n    const second = Math.min(Math.max(cc - 600, 0), 1200) * 1.5;\n    const third = Math.max(cc - 1800, 0) * 4;\n\n    return Math.round(first + second + third);\n}",
+    "human_score": 14,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 0,
+      "C3": 6,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "ไม่มี if/switch (ใช้ Math.min/max แทนการแบ่งช่วง) จึงให้ C2 = 0 ตาม rubric ตรงตัว อาจารย์อาจให้ 6 เพราะผลถูกทุกช่วง"
+  },
+  {
+    "answer_id": "s06",
+    "answer_text": "function getTax(cc) {\n    let result = 0;\n\n    result = cc <= 600\n        ? cc * 0.5\n        : cc <= 1800\n            ? 300 + (cc - 600) * 1.5\n            : 2100 + (cc - 1800) * 4;\n\n    return parseInt(Math.round(result));\n}",
+    "human_score": 20,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 6,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "ใช้ ternary ซึ่งเป็นเงื่อนไขแบบเดียวกับ if-else จึงให้ C2 เต็ม"
+  },
+  {
+    "answer_id": "s07",
+    "answer_text": "function calTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 300 + (cc - 600) * 1.5;\n    } else {\n        tax = cc * 4;\n    }\n    return tax;\n}",
+    "human_score": 16,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 4,
+      "C4": 2,
+      "C5": 0
+    },
+    "note": "",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s08",
+    "answer_text": "function calculateTax(cc) {\n    let rate;\n\n    if (cc <= 600) {\n        rate = 0.5;\n    } else if (cc <= 1800) {\n        rate = 1.5;\n    } else {\n        rate = 4;\n    }\n    return Math.round(cc * rate);\n}",
+    "human_score": 16,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 2,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s09",
+    "answer_text": "function carTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = (cc - 600) * 1.5;\n    } else {\n        tax = (cc - 1800) * 4;\n    }\n    return Math.round(tax);\n}",
+    "human_score": 16,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 2,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s10",
+    "answer_text": "function taxCalculate(cc) {\n    let tax = 300;\n\n    if (cc <= 600) {\n        tax = 300;\n    } else if (cc <= 1800) {\n        tax = 300 + (cc - 600) * 1.5;\n    } else {\n        tax = 300 + 1200 * 1.5 + (cc - 1800) * 4;\n    }\n    return Math.round(tax);\n}",
+    "human_score": 18,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 4,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "กรณี <=600 คืนค่า 300 คงที่ (ผิดเมื่อ cc < 600)",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s11",
+    "answer_text": "function calculateVehicleTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 300 + (cc - 600) * 1.5;\n    } else {\n        tax = (cc - 1800) * 4;\n    }\n    return Math.round(tax);\n}",
+    "human_score": 18,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 4,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s12",
+    "answer_text": "function calVehicleTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 300 + cc * 1.5;\n    } else {\n        tax = 300 + 1200 * 1.5 + (cc - 1800) * 4;\n    }\n    return Math.round(tax);\n}",
+    "human_score": 18,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 4,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s13",
+    "answer_text": "function carTax(cc) {\n    let tax;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 300 + (cc - 600) * 1.5;\n    }\n    return tax;\n}",
+    "human_score": 14,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 4,
+      "C3": 4,
+      "C4": 2,
+      "C5": 0
+    },
+    "note": "ไม่มีกรณี >1800 และไม่แปลงเป็น integer",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s14",
+    "answer_text": "function calculateTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 300 + (cc - 600) * 1.5;\n    } else {\n        tax = 2100 + (cc - 1800) * 4;\n\n    return Math.round(tax);\n}",
+    "human_score": 20,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 6,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "ขาดวงเล็บปิดของ else (syntax) แต่ตรรกะถูก",
+    "label_source": "claude-draft",
+    "label_note": "syntax error (ขาด }) แต่ตรรกะถูก ให้คะแนนตามเจตนา อาจารย์อาจหัก C1"
+  },
+  {
+    "answer_id": "s15",
+    "answer_text": "function taxCar(cc) {\n    let tax = 0;\n\n    if (CC <= 600) {\n        tax = CC * 0.5;\n    } else {\n        tax = 300 + (CC - 600) * 1.5;\n    }\n    return tax;\n}",
+    "human_score": 12,
+    "human_criteria": {
+      "C1": 2,
+      "C2": 4,
+      "C3": 4,
+      "C4": 2,
+      "C5": 0
+    },
+    "note": "ใช้ CC แทน cc, ไม่มีกรณี >1800, ไม่แปลงเป็น integer",
+    "label_source": "claude-draft",
+    "label_note": "ใช้ CC ซึ่งไม่ได้ประกาศ (รันแล้ว ReferenceError) ให้ C1 พารามิเตอร์ 0 และ C3 ตามเจตนาเฉพาะ 2 กรณีที่มี"
+  },
+  {
+    "answer_id": "s16",
+    "answer_text": "function getCarTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    } else if (cc <= 1800) {\n        tax = 300 + (cc - 600) * 1.5;\n    } else {\n        tax = 2100 + (cc - 1800) * 4;\n    }\n\n    console.log(Math.round(tax));\n}\nlet result = getCarTax(2000);",
+    "human_score": 20,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 6,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "ใช้ console.log แทน return",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s17",
+    "answer_text": "function calculateTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc * 0.5;\n    }\n\n    if (cc > 600) {\n        tax = cc * 1.5;\n    }\n\n    if (cc > 1800) {\n        tax = cc * 4;\n    }\n\n    return tax;\n}",
+    "human_score": 14,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 2,
+      "C4": 2,
+      "C5": 0
+    },
+    "note": "",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s18",
+    "answer_text": "function carTax(cc) {\n    let tax = 0;\n\n    if (cc <= 600) {\n        tax = cc / 2;\n    } else if (cc <= 1800) {\n        tax = 600 / 2 + (cc / 2) * 1.5;\n    } else {\n        tax = cc * 4;\n    }\n\n    return Math.round(tax);\n}",
+    "human_score": 16,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 2,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s19",
+    "answer_text": "function tax(cc) {\n    let result = 0;\n\n    if (cc <= 600) {\n        result = cc * 0.5;\n    } else if (cc <= 1800) {\n        result = 300;\n        // calculate next cc\n    } else {\n        // calculate more than 1800 cc\n    }\n\n    return result;\n}",
+    "human_score": 14,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 6,
+      "C3": 2,
+      "C4": 2,
+      "C5": 0
+    },
+    "note": "กรณี 2 และ 3 ยังไม่เสร็จ (มีแต่ comment)",
+    "label_source": "claude-draft"
+  },
+  {
+    "answer_id": "s20",
+    "answer_text": "function calTax(cc) {\n    return Math.round(cc * 0.5);\n}\n\nconsole.log(calTax(2000));",
+    "human_score": 10,
+    "human_criteria": {
+      "C1": 4,
+      "C2": 0,
+      "C3": 2,
+      "C4": 2,
+      "C5": 2
+    },
+    "note": "ไม่มีเงื่อนไข ใช้อัตราเดียว",
+    "label_source": "claude-draft"
+  }
 ]

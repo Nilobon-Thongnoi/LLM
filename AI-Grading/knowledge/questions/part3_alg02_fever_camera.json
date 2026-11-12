@@ -1,0 +1,292 @@
+{
+  "id": "ALG-02",
+  "exam_part": 3,
+  "domains": [
+    "algorithm"
+  ],
+  "status": "draft - built from Grading-Data/Part3_Algorithm/question_part3.txt RULES, no graded examples yet",
+  "question": "จงออกแบบอัลกอริทึมจากโจทย์ดังต่อไปนี้ หนึ่งในอาการของผู้ป่วยโควิดคือจะมีอุณหภูมิร่างกายที่สูงกว่าคนปกติ สมมติว่าทางมหาวิทยาลัยมีแนวคิดจะซื้อกล้องตรวจวัดอุณหภูมิที่สามารถวัดอุณหภูมิของคนได้ทีละหลาย ๆ คนพร้อมกัน ให้ n เป็นจำนวนคนที่เดินผ่านหน้ากล้อง ให้นักศึกษาออกแบบอัลกอริทึมสำหรับตรวจหาผู้ป่วยโควิด ซึ่งใช้เวลาในการทำงานน้อยกว่า O(n) ในคำตอบของนักศึกษาให้อธิบายขั้นตอนการทำงานของอัลกอริทึมโดยละเอียด โดยในคำตอบให้ระบุ วิธีการเปรียบเทียบเพื่อหาผู้ป่วย วิเคราะห์ประสิทธิภาพการทำงานของอัลกอริทึมดังกล่าวโดยแสดงวิธีการหาพร้อมคำอธิบายโดยละเอียด",
+  "accepted_answers": [
+    {
+      "label": "Reference: parallel processing of the whole thermal frame (full score)",
+      "answer": "กล้องจับภาพความร้อนทั้งเฟรม (ขนาดพิกเซลคงที่ ไม่ขึ้นกับ n) ใช้ hardware/GPU เปรียบเทียบอุณหภูมิทุกพิกเซลกับ threshold (เช่น 37.5°C) พร้อมกันในครั้งเดียว แล้วรวมพิกเซลที่ร้อนเกินเป็นก้อน (blob) เพื่อระบุตัวคนที่มีไข้ เวลาต่อเฟรมเป็น O(1) จำนวนเฟรมไม่โตตาม n โดยตรง จึงน้อยกว่า O(n)"
+    },
+    {
+      "label": "Valid: one processor per person, no merging (full score if assumptions are stated)",
+      "answer": "มี processor n ตัว ตัวละ 1 คน แต่ละตัวเทียบอุณหภูมิของคนนั้นกับ threshold แล้วเขียนผลของตัวเอง ไม่ต้องรวมผล เวลา O(1) (งานรวม O(n) ไม่ทำให้เกินเงื่อนไข)"
+    },
+    {
+      "label": "Valid: n processors with tree merging (count / max)",
+      "answer": "processor n ตัวเทียบ threshold พร้อมกัน แล้วรวมผล (นับจำนวนหรือหาค่าสูงสุด) แบบต้นไม้ ได้ O(log n)"
+    },
+    {
+      "label": "Valid: binary search on temperatures the camera already delivers sorted",
+      "answer": "สมมติว่ากล้องส่งรายการอุณหภูมิที่เรียงแล้ว ใช้ binary search หาตำแหน่งแรกที่ >= threshold ได้ O(log n) (ถ้ารายงานทุกคนเพิ่ม O(k) เป็น O(log n + k)) ต้องระบุข้อสมมติว่าข้อมูลเรียงแล้ว"
+    },
+    {
+      "label": "Valid: heap maintained by the camera",
+      "answer": "กล้องดูแล max-heap ของอุณหภูมิไว้แล้ว ตรวจ root ว่าเกิน threshold หรือไม่ได้ O(1) ถ้าต้องดึงผู้ป่วยทุกคน เพิ่มตามจำนวนผู้ป่วย k"
+    }
+  ],
+  "grading_notes": [
+    "PRIORITY: these notes are the teacher's rules for this question. They override general algorithm guidance and your own assumptions about real hardware.",
+    "a1 assumption: a student who writes that there are n processors / n comparators / one processor per person HAS stated the assumption. Give a1 = 4 if the logic is right. Do not ask whether such hardware is realistic.",
+    "c3 with parallelism: 'Parallel For i = 1 to n' with n processors is NOT a sequential loop. Its time is O(1) (no merging) or O(log n) (tree merging). Do not call it O(n).",
+    "c3 = 4 needs BOTH: (1) the Big-O matches the algorithm as written, AND (2) that Big-O is below O(n). If the written algorithm is O(n), O(n log n), O(n^2) or worse, c3 = 0 even when the student analysed it correctly (ceiling rule); the correct analysis is rewarded in c2, not c3. Binary search on data the student did not say is sorted: a1 = 2 (missing assumption) but c3 = 4, because the written binary search is O(log n). Do not move the missing assumption into c3.",
+    "c1 (2): 2 only if the answer says in words what n means (e.g. 'n = จำนวนคนที่เดินผ่านกล้อง', 'รับจำนวนคนทั้งหมด n คน'). Writing only 'Input n' or using n in formulas without saying what it is = 1. Defining the array or other variables does not replace defining n.",
+    "c2 (4): 4 = the analysis shows WHERE the time comes from: number of loop rounds (n rounds -> O(n)), halving per round (-> O(log n)), n processors each doing one comparison at the same time (-> O(1)), or per-processor work n/p plus merge log p. A recurrence is NOT required. 2 = only part of this (e.g. 'O(n/4)' without explaining it is still O(n), or claiming a bound from parallelism without saying how many processors). 0 = only states a Big-O or 'I think it is O(1)'.",
+    "a3 (3): 3 = ordered steps from input to output that could be coded. 1.5 = a key step is one vague line (e.g. 'Parallel Find Maximum', 'Divide data into groups' without saying how) or the output step does not follow from the steps. a3 judges the steps, not whether the algorithm is fast enough.",
+    "The answer has 3 parts: pseudocode, explanation, performance analysis. Pseudocode is the main evidence for a3 and for the real Big-O (c3). The explanation is the main evidence for a1 (assumptions) and a2 (comparison method). The analysis is the main evidence for c1 and c2. If they conflict, judge Big-O from the pseudocode and mention the mismatch in feedback.",
+    "Any reasonable fever threshold (e.g. 37.5 or 38 °C) is correct.",
+    "Analyse the worst case. If the student says the worst case is O(n) or higher, apply the ceiling rule.",
+    "CEILING RULE: if the algorithm as written must check every person one by one (O(n) or more, e.g. a loop over all people, or sorting first), then a1 = 0 and c3 = 0. a2, a3, c1, c2 are graded normally.",
+    "Parallel processing time, decided from the number of processors the STUDENT states: n processors with no merging -> O(1), below O(n); n processors merging by tree (count or max) -> O(log n), below O(n); sqrt(n) processors with sqrt(n) people each -> O(sqrt n), below O(n); p processors merged by tree -> O(n/p + log p), below O(n) when p grows with n; a constant number of processors (e.g. 2) -> O(n), NOT below O(n), ceiling rule applies. Do not mix these numbers with what the student wrote.",
+    "Using n processors counts as a clearly stated assumption (a1 can be full if the logic is right); the student does not need to prove it is realistic.",
+    "Claiming O(1) or O(log n) from parallelism without saying how many processors, or without showing where it comes from: c2 at most 2.",
+    "Separating 'time O(1)' from 'total work O(n)' is a detailed analysis. Do not deduct, and total work O(n) does not trigger the ceiling rule.",
+    "Comparing a fixed-size group per instruction (SIMD with constant width) is still O(n): ceiling rule.",
+    "A single instruction that checks every value (e.g. 'If All Temperature >= 38') without stating parallel hardware still checks everyone: O(n).",
+    "An algorithm that does not actually find the patients (checks only half and discards the rest, uses an average instead of each person) gets a1 = 0 even if its Big-O is below O(n).",
+    "Binary search: correct only with the assumption that the camera already delivers sorted data. Counting the sort makes it O(n log n): ceiling rule.",
+    "Reporting every patient adds O(k), k = number of patients. O(log n + k) or O(1 + k) are correct.",
+    "Divide and conquer max with T(n) = 2T(n/2) + O(1) is O(n), not O(log n). If the student concludes O(log n), c3 = 0.",
+    "Score bands (use only these values): a1 (4): 4 = correct method and states its assumption, 2 = correct method without the assumption (e.g. binary search without saying data is sorted), 0 = not below O(n) or does not work. a2 (3): 3 = states a threshold and a clear comparison, 1.5 = vague ('compare with a given temperature'), 0 = none. a3 (3): 3 = complete ordered steps that could be coded, 1.5 = steps with gaps, 0 = no steps. c1 (2): 2 = defines n clearly (and other variables used), 1 = uses n without defining it, 0 = none. c2 (4): 4 = full derivation (count of rounds or recurrence), 2 = partial analysis, 0 = only states the answer. c3 (4): 4 = Big-O correct for the written algorithm and below O(n), 0 = wrong or not below O(n).",
+    "An answer unrelated to the question, or empty, gets 0 on every criterion."
+  ],
+  "graded_examples": [
+    {
+      "label": "Answer s01",
+      "student_answer": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nParallel For i = 1 to n\n    If Temperature[i] >= 38 Then\n        Result[i] = \"High Risk\"\n    Else\n        Result[i] = \"Normal\"\n    End If\nEnd Parallel For\nOutput Result\n\nคำอธิบาย :\nเริ่มจากรับจำนวนคนทั้งหมด n คน และรับข้อมูลอุณหภูมิของทุกคน จากนั้นใช้การประมวลผลแบบขนานโดยแบ่งให้ Processor แต่ละตัวตรวจสอบอุณหภูมิของคนละหนึ่งคนพร้อมกัน หากอุณหภูมิตั้งแต่ 38 องศาขึ้นไปให้จัดอยู่ในกลุ่มเสี่ยง แต่ถ้าต่ำกว่า 38 องศาให้จัดอยู่ในกลุ่มปกติ หลังจากนั้นจึงแสดงผลลัพธ์ของทุกคน\n\nวิเคราะห์ประสิทธิภาพ :\nเนื่องจากใช้ Processor จำนวน n ตัว ทำให้สามารถเปรียบเทียบอุณหภูมิพร้อมกันได้ทั้งหมด ดังนั้นใช้เวลาในการประมวลผลเพียง O(1) แต่ต้องใช้ Processor จำนวน n ตัว และมีการทำงานรวมทั้งหมด O(n)",
+      "criterion_scores": [
+        {
+          "criterion": "a1 algorithm below O(n) with stated assumption",
+          "awarded": 4,
+          "max": 4
+        },
+        {
+          "criterion": "a2 comparison method and threshold",
+          "awarded": 3,
+          "max": 3
+        },
+        {
+          "criterion": "a3 complete ordered steps",
+          "awarded": 3,
+          "max": 3
+        },
+        {
+          "criterion": "c1 variables defined",
+          "awarded": 2,
+          "max": 2
+        },
+        {
+          "criterion": "c2 derivation of running time",
+          "awarded": 4,
+          "max": 4
+        },
+        {
+          "criterion": "c3 correct Big-O below O(n)",
+          "awarded": 4,
+          "max": 4
+        }
+      ],
+      "total": 20,
+      "max_total": 20,
+      "explanation": "n processors, no merging: O(1). Full score."
+    },
+    {
+      "label": "Answer s02",
+      "student_answer": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nDivide Temperature into 2 groups\n\nParallel:\n    CheckGroup(Group1)\n    CheckGroup(Group2)\n\nFunction CheckGroup(Group)\n    For each person in Group\n        If Temperature >= 38\n            Mark as High Risk\n        Else\n            Mark as Normal\n        End If\n    End For\nEnd Function\nOutput Result\n\nคำอธิบาย :\nแบ่งจำนวนคนออกเป็น 2 กลุ่มเท่า ๆ กัน จากนั้นให้ Processor ทำงานพร้อมกัน โดย Processor ตัวแรกตรวจสอบกลุ่มที่ 1 และ Processor ตัวที่สองตรวจสอบกลุ่มที่ 2 เมื่อทั้งสองกลุ่มตรวจเสร็จแล้วจึงนำผลลัพธ์มารวมกัน\n\nวิเคราะห์ประสิทธิภาพ :\nแต่ละ Processor ตรวจสอบคนประมาณ n/2 คน ดังนั้นเวลาในการทำงานคือ O(n/2) ซึ่งยังเป็น O(n) ไม่ใช่ O(1) แต่ใช้เวลาน้อยกว่าการใช้ Processor เพียงตัวเดียวในทางปฏิบัติ",
+      "criterion_scores": [
+        {
+          "criterion": "a1 algorithm below O(n) with stated assumption",
+          "awarded": 0,
+          "max": 4
+        },
+        {
+          "criterion": "a2 comparison method and threshold",
+          "awarded": 3,
+          "max": 3
+        },
+        {
+          "criterion": "a3 complete ordered steps",
+          "awarded": 3,
+          "max": 3
+        },
+        {
+          "criterion": "c1 variables defined",
+          "awarded": 1,
+          "max": 2
+        },
+        {
+          "criterion": "c2 derivation of running time",
+          "awarded": 4,
+          "max": 4
+        },
+        {
+          "criterion": "c3 correct Big-O below O(n)",
+          "awarded": 0,
+          "max": 4
+        }
+      ],
+      "total": 11,
+      "max_total": 20,
+      "explanation": "2 processors (constant) is still O(n): ceiling rule, a1 = c3 = 0. Steps and derivation are fine."
+    },
+    {
+      "label": "Answer s07",
+      "student_answer": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nleft = 1\nright = n\n\nWhile left <= right\n    mid = (left + right) / 2\n\n    If Temperature[mid] >= 38\n        Output \"High Risk\"\n        right = mid - 1\n    Else\n        left = mid + 1\n    End If\nEnd While\n\nคำอธิบาย :\nใช้ Binary Search โดยตรวจสอบอุณหภูมิที่ตำแหน่งตรงกลางก่อน หากพบว่ามีอุณหภูมิสูงกว่าหรือเท่ากับ 38 ก็จะค้นหาทางด้านซ้ายต่อ แต่ถ้าอุณหภูมิต่ำกว่า 38 ก็จะค้นหาทางด้านขวา\n\nวิเคราะห์ประสิทธิภาพ :\nในแต่ละรอบจะลดจำนวนข้อมูลลงครึ่งหนึ่ง ทำให้มีเวลาในการทำงาน O(log n) ซึ่งรวดเร็วกว่า O(n)",
+      "criterion_scores": [
+        {
+          "criterion": "a1 algorithm below O(n) with stated assumption",
+          "awarded": 2,
+          "max": 4
+        },
+        {
+          "criterion": "a2 comparison method and threshold",
+          "awarded": 3,
+          "max": 3
+        },
+        {
+          "criterion": "a3 complete ordered steps",
+          "awarded": 3,
+          "max": 3
+        },
+        {
+          "criterion": "c1 variables defined",
+          "awarded": 1,
+          "max": 2
+        },
+        {
+          "criterion": "c2 derivation of running time",
+          "awarded": 4,
+          "max": 4
+        },
+        {
+          "criterion": "c3 correct Big-O below O(n)",
+          "awarded": 4,
+          "max": 4
+        }
+      ],
+      "total": 17,
+      "max_total": 20,
+      "explanation": "Binary search without saying the data is sorted: a1 = 2 only. c3 = 4 because O(log n) matches the written binary search."
+    },
+    {
+      "label": "Answer s05",
+      "student_answer": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nParallel Find Maximum Temperature\n\nIf Maximum >= 38\n    Output \"พบผู้ป่วยที่มีความเสี่ยง\"\nElse\n    Output \"ไม่พบผู้ป่วยที่มีความเสี่ยง\"\nEnd If\n\nคำอธิบาย :\nให้อุปกรณ์ประมวลผลอุณหภูมิของคนทั้งหมดพร้อมกัน จากนั้นนำอุณหภูมิมาเปรียบเทียบเพื่อหาค่าที่มากที่สุด หากค่าอุณหภูมิสูงสุดมากกว่าหรือเท่ากับ 38 องศา แสดงว่ามีคนอย่างน้อยหนึ่งคนที่อยู่ในกลุ่มเสี่ยง\n\nวิเคราะห์ประสิทธิภาพ :\nใช้การเปรียบเทียบแบบขนานและรวมผลแบบต้นไม้ (Tree Reduction) ทำให้ใช้เวลา O(log n)",
+      "criterion_scores": [
+        {
+          "criterion": "a1 algorithm below O(n) with stated assumption",
+          "awarded": 4,
+          "max": 4
+        },
+        {
+          "criterion": "a2 comparison method and threshold",
+          "awarded": 3,
+          "max": 3
+        },
+        {
+          "criterion": "a3 complete ordered steps",
+          "awarded": 1.5,
+          "max": 3
+        },
+        {
+          "criterion": "c1 variables defined",
+          "awarded": 1,
+          "max": 2
+        },
+        {
+          "criterion": "c2 derivation of running time",
+          "awarded": 2,
+          "max": 4
+        },
+        {
+          "criterion": "c3 correct Big-O below O(n)",
+          "awarded": 4,
+          "max": 4
+        }
+      ],
+      "total": 15.5,
+      "max_total": 20,
+      "explanation": "Parallel max without saying how many processors: c2 capped at 2. 'Parallel Find Maximum' is one vague step: a3 = 1.5."
+    },
+    {
+      "label": "Answer s13",
+      "student_answer": "Pseudocode :\nFunction FindCovid(Temperature, n)\n\n    If n = 1\n        If Temperature[1] >= 38\n            Return \"High Risk\"\n        Else\n            Return \"Normal\"\n        End If\n    End If\n\n    mid = n / 2\n\n    FindCovid(Temperature[1...mid], mid)\n\nEnd Function\n\nคำอธิบาย :\nแบ่งข้อมูลทั้งหมดออกเป็น 2 ส่วน และจะเลือกตรวจสอบข้อมูลเพียงครึ่งแรกก่อน จากนั้นแบ่งครึ่งข้อมูลไปเรื่อย ๆ จนเหลือคนเพียง 1 คน แล้วตรวจสอบอุณหภูมิว่ามากกว่า 38 หรือไม่\n\nวิเคราะห์ประสิทธิภาพ :\nทุกครั้งที่ทำงานจะลดข้อมูลลงครึ่งหนึ่ง จึงมี Time Complexity เป็น O(log n)",
+      "criterion_scores": [
+        {
+          "criterion": "a1 algorithm below O(n) with stated assumption",
+          "awarded": 0,
+          "max": 4
+        },
+        {
+          "criterion": "a2 comparison method and threshold",
+          "awarded": 3,
+          "max": 3
+        },
+        {
+          "criterion": "a3 complete ordered steps",
+          "awarded": 3,
+          "max": 3
+        },
+        {
+          "criterion": "c1 variables defined",
+          "awarded": 1,
+          "max": 2
+        },
+        {
+          "criterion": "c2 derivation of running time",
+          "awarded": 4,
+          "max": 4
+        },
+        {
+          "criterion": "c3 correct Big-O below O(n)",
+          "awarded": 4,
+          "max": 4
+        }
+      ],
+      "total": 15,
+      "max_total": 20,
+      "explanation": "Checks only the first half, so it cannot find all patients: a1 = 0. Clear threshold and steps."
+    },
+    {
+      "label": "Answer s18",
+      "student_answer": "Pseudocode :\nInput n\nInput All Temperature\n\nIf All Temperature >= 38\n    Output \"Covid\"\nElse\n    Output \"Normal\"\nEnd If\n\nคำอธิบาย :\nกล้องสามารถวัดอุณหภูมิของคนได้หลายคนพร้อมกันอยู่แล้ว จึงสามารถรับข้อมูลทั้งหมดได้ในครั้งเดียว และใช้คำสั่ง If ตรวจสอบว่ามีอุณหภูมิถึงเกณฑ์หรือไม่ ทำให้ไม่ต้องใช้ Loop\n\nวิเคราะห์ประสิทธิภาพ :\nใช้คำสั่งเพียงครั้งเดียว จึงคิดว่าเป็น O(1) เพราะไม่ต้องวนลูปตรวจสอบข้อมูล",
+      "criterion_scores": [
+        {
+          "criterion": "a1 algorithm below O(n) with stated assumption",
+          "awarded": 0,
+          "max": 4
+        },
+        {
+          "criterion": "a2 comparison method and threshold",
+          "awarded": 3,
+          "max": 3
+        },
+        {
+          "criterion": "a3 complete ordered steps",
+          "awarded": 1.5,
+          "max": 3
+        },
+        {
+          "criterion": "c1 variables defined",
+          "awarded": 1,
+          "max": 2
+        },
+        {
+          "criterion": "c2 derivation of running time",
+          "awarded": 0,
+          "max": 4
+        },
+        {
+          "criterion": "c3 correct Big-O below O(n)",
+          "awarded": 0,
+          "max": 4
+        }
+      ],
+      "total": 5.5,
+      "max_total": 20,
+      "explanation": "'If All Temperature >= 38' with no parallel hardware still checks everyone: O(n), ceiling rule. c2 = 0 because it only states 'I think O(1)'."
+    }
+  ]
+}

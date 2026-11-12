@@ -2,11 +2,29 @@
   "domain": "er_diagram",
   "title": "ER diagrams and database design",
   "detect": [
-    "er-diagram", "er diagram", "erd", "ฐานข้อมูล", "database", "table", "ตาราง", "entity", "relationship",
-    "relationships", "cardinality", "ความสัมพันธ์", "primary key", "foreign key", "fields", "data types",
-    "\"tables\"", "\"relationships\""
+    "er-diagram",
+    "er diagram",
+    "erd",
+    "ฐานข้อมูล",
+    "database",
+    "table",
+    "ตาราง",
+    "entity",
+    "relationship",
+    "relationships",
+    "cardinality",
+    "ความสัมพันธ์",
+    "primary key",
+    "foreign key",
+    "fields",
+    "data types",
+    "\"tables\"",
+    "\"relationships\""
   ],
   "grading_guide": [
+    "Partial credit: list the entities, fields and relationships the question requires, then award each criterion in proportion to how many of them the student drew correctly. An incomplete diagram with some correct tables never scores 0 on the table criterion.",
+    "A table with an empty name whose fields clearly describe one entity (e.g. office_id, office_name) counts as that entity; treat the missing name as a minor issue.",
+    "A relationship between the right pair of tables with the wrong cardinality earns part of that relationship's share, not zero.",
     "Grade the data model's meaning: entities, attributes, keys, relationships and cardinalities. Ignore layout coordinates, colours and random element ids in the JSON.",
     "Accept different but equivalent table and field names and any reasonable SQL data type.",
     "Read every relationship's source and target. A relationship only exists when both endpoints are real tables; similar field names alone are not a relationship.",
@@ -17,57 +35,138 @@
   "concepts": [
     {
       "id": "er-keys",
-      "keywords": ["pk", "primary key", "fk", "foreign key", "key", "คีย์"],
+      "keywords": [
+        "pk",
+        "primary key",
+        "fk",
+        "foreign key",
+        "key",
+        "คีย์"
+      ],
       "text": "A primary key uniquely identifies each row and must not be null. A foreign key references the primary key of another (or the same) table and implements a relationship. A composite primary key uses several columns together, typical for junction tables."
     },
     {
       "id": "er-cardinality-1m",
-      "keywords": ["1:m", "1:n", "one-to-many", "หนึ่งต่อหลาย", "cardinality"],
+      "keywords": [
+        "1:m",
+        "1:n",
+        "one-to-many",
+        "หนึ่งต่อหลาย",
+        "cardinality"
+      ],
       "text": "One-to-many (1:M): the foreign key goes on the 'many' side. Department 1:M Employee means Employee has dept_id referencing Department. Putting the FK on the 'one' side would allow only one employee per department."
     },
     {
       "id": "er-cardinality-mn",
-      "keywords": ["m:n", "m:m", "many-to-many", "หลายต่อหลาย", "junction", "associative", "bridge"],
+      "keywords": [
+        "m:n",
+        "m:m",
+        "many-to-many",
+        "หลายต่อหลาย",
+        "junction",
+        "associative",
+        "bridge"
+      ],
       "text": "Many-to-many (M:N) needs a junction table containing foreign keys to both tables, with a composite primary key or a surrogate key. In the diagram this appears as two 1:M relationships into the junction table; both styles are correct."
     },
     {
       "id": "er-cardinality-11",
-      "keywords": ["1:1", "one-to-one", "หนึ่งต่อหนึ่ง"],
+      "keywords": [
+        "1:1",
+        "one-to-one",
+        "หนึ่งต่อหนึ่ง"
+      ],
       "text": "One-to-one (1:1): a unique foreign key on either side, or merged into one table. Using 1:1 where the requirement says 'many' (e.g. a department in several offices) is a cardinality error."
     },
     {
       "id": "er-participation",
-      "keywords": ["optional", "mandatory", "participation", "zero", "null"],
+      "keywords": [
+        "optional",
+        "mandatory",
+        "participation",
+        "zero",
+        "null"
+      ],
       "text": "Participation (optional vs mandatory) is shown by minimum cardinality (0 or 1). A nullable foreign key means optional participation. Missing participation detail is minor unless the rubric asks for it."
     },
     {
       "id": "er-specialization",
-      "keywords": ["type", "ประเภท", "ระดับ", "subtype", "specialization", "generalization", "inheritance", "manager", "ผู้จัดการ"],
+      "keywords": [
+        "type",
+        "ประเภท",
+        "ระดับ",
+        "subtype",
+        "specialization",
+        "generalization",
+        "inheritance",
+        "manager",
+        "ผู้จัดการ"
+      ],
       "text": "Kinds of an entity (e.g. temporary / permanent / manager employees) can be modelled as a type column, a lookup table with a FK, or subtype tables. All are valid if each kind can be recorded. A manager of a department can be a type value or a FK such as manager_id; the latter is a second relationship to Employee."
     },
     {
       "id": "er-self-reference",
-      "keywords": ["self", "recursive", "supervisor", "manager_id", "หัวหน้า"],
+      "keywords": [
+        "self",
+        "recursive",
+        "supervisor",
+        "manager_id",
+        "หัวหน้า"
+      ],
       "text": "A self-referencing relationship (e.g. employee supervises employees) is a FK in a table pointing to the same table's primary key."
     },
     {
       "id": "er-flags",
-      "keywords": ["headquarter", "สำนักงานใหญ่", "boolean", "is_", "flag", "main"],
+      "keywords": [
+        "headquarter",
+        "สำนักงานใหญ่",
+        "boolean",
+        "is_",
+        "flag",
+        "main"
+      ],
       "text": "A single special instance (e.g. the head office) can be marked with a BOOLEAN flag column, a type column, or a FK from the owner table pointing at it. Any of these satisfies a 'one of them is the head office' requirement."
     },
     {
       "id": "er-data-types",
-      "keywords": ["data type", "data types", "varchar", "int", "integer", "date", "decimal", "char", "text", "ชนิดข้อมูล"],
+      "keywords": [
+        "data type",
+        "data types",
+        "varchar",
+        "int",
+        "integer",
+        "date",
+        "decimal",
+        "char",
+        "text",
+        "ชนิดข้อมูล"
+      ],
       "text": "Reasonable types: INT/INTEGER/SERIAL/BIGINT for ids, VARCHAR(n)/TEXT for names and addresses, DATE/DATETIME for dates, DECIMAL/NUMERIC for money, BOOLEAN for flags. Exact VARCHAR length does not matter. Storing numbers or dates as text is weak but not fatal."
     },
     {
       "id": "er-normalization",
-      "keywords": ["normal", "1nf", "2nf", "3nf", "normalization", "redundant", "ซ้ำซ้อน", "multivalued"],
+      "keywords": [
+        "normal",
+        "1nf",
+        "2nf",
+        "3nf",
+        "normalization",
+        "redundant",
+        "ซ้ำซ้อน",
+        "multivalued"
+      ],
       "text": "1NF: atomic values, no repeating groups (a list of offices in one column breaks 1NF). 2NF: no partial dependency on part of a composite key. 3NF: no transitive dependency between non-key columns. Multivalued attributes become a separate table."
     },
     {
       "id": "er-json-format",
-      "keywords": ["\"tables\"", "\"relationships\"", "\"fields\"", "\"columns\"", "\"source\"", "\"target\""],
+      "keywords": [
+        "\"tables\"",
+        "\"relationships\"",
+        "\"fields\"",
+        "\"columns\"",
+        "\"source\"",
+        "\"target\""
+      ],
       "text": "Student ER diagrams may arrive as JSON with tables (name, fields/columns with types and key flags) and relationships (source, target, cardinality). Positions (x, y), sizes and generated ids carry no meaning. Ignore relationships whose source or target is missing or not an existing table."
     }
   ]

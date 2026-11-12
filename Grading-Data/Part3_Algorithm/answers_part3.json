@@ -2,141 +2,314 @@
   {
     "answer_id": "s01",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nParallel For i = 1 to n\n    If Temperature[i] >= 38 Then\n        Result[i] = \"High Risk\"\n    Else\n        Result[i] = \"Normal\"\n    End If\nEnd Parallel For\nOutput Result\n\nคำอธิบาย :\nเริ่มจากรับจำนวนคนทั้งหมด n คน และรับข้อมูลอุณหภูมิของทุกคน จากนั้นใช้การประมวลผลแบบขนานโดยแบ่งให้ Processor แต่ละตัวตรวจสอบอุณหภูมิของคนละหนึ่งคนพร้อมกัน หากอุณหภูมิตั้งแต่ 38 องศาขึ้นไปให้จัดอยู่ในกลุ่มเสี่ยง แต่ถ้าต่ำกว่า 38 องศาให้จัดอยู่ในกลุ่มปกติ หลังจากนั้นจึงแสดงผลลัพธ์ของทุกคน\n\nวิเคราะห์ประสิทธิภาพ :\nเนื่องจากใช้ Processor จำนวน n ตัว ทำให้สามารถเปรียบเทียบอุณหภูมิพร้อมกันได้ทั้งหมด ดังนั้นใช้เวลาในการประมวลผลเพียง O(1) แต่ต้องใช้ Processor จำนวน n ตัว และมีการทำงานรวมทั้งหมด O(n)",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 20,
+    "human_criteria": {
+      "a1": 4,
+      "a2": 3,
+      "a3": 3,
+      "c1": 2,
+      "c2": 4,
+      "c3": 4
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "processor n ตัว ไม่ต้องรวมผล = O(1) และนิยาม n ในคำอธิบาย"
   },
   {
     "answer_id": "s02",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nDivide Temperature into 2 groups\n\nParallel:\n    CheckGroup(Group1)\n    CheckGroup(Group2)\n\nFunction CheckGroup(Group)\n    For each person in Group\n        If Temperature >= 38\n            Mark as High Risk\n        Else\n            Mark as Normal\n        End If\n    End For\nEnd Function\nOutput Result\n\nคำอธิบาย :\nแบ่งจำนวนคนออกเป็น 2 กลุ่มเท่า ๆ กัน จากนั้นให้ Processor ทำงานพร้อมกัน โดย Processor ตัวแรกตรวจสอบกลุ่มที่ 1 และ Processor ตัวที่สองตรวจสอบกลุ่มที่ 2 เมื่อทั้งสองกลุ่มตรวจเสร็จแล้วจึงนำผลลัพธ์มารวมกัน\n\nวิเคราะห์ประสิทธิภาพ :\nแต่ละ Processor ตรวจสอบคนประมาณ n/2 คน ดังนั้นเวลาในการทำงานคือ O(n/2) ซึ่งยังเป็น O(n) ไม่ใช่ O(1) แต่ใช้เวลาน้อยกว่าการใช้ Processor เพียงตัวเดียวในทางปฏิบัติ",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 11,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "processor 2 ตัว (คงที่) = O(n) เข้ากฎเพดาน"
   },
   {
     "answer_id": "s03",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\np = sqrt(n)\n\nDivide people into p groups\n\nParallel For each group\n    For each person in group\n        If Temperature >= 38\n            Output \"High Risk\"\n        Else\n            Output \"Normal\"\n        End If\n    End For\nEnd Parallel For\n\nคำอธิบาย :\nเริ่มต้นกำหนดจำนวน Processor เท่ากับรากที่สองของจำนวนคนทั้งหมด จากนั้นแบ่งคนออกเป็นกลุ่มเท่า ๆ กัน โดยให้แต่ละ Processor รับผิดชอบคนในกลุ่มของตัวเอง แล้วตรวจสอบอุณหภูมิทีละคนภายในกลุ่ม แต่ทุกกลุ่มจะทำงานในเวลาเดียวกัน\n\nวิเคราะห์ประสิทธิภาพ :\nมี Processor จำนวน \\(\\sqrt n\\) ตัว และแต่ละตัวต้องตรวจสอบประมาณ \\(\\sqrt n\\) คน ดังนั้นเวลาทำงานจึงเท่ากับ O(\\(\\sqrt n\\)) ซึ่งน้อยกว่า O(n)",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 19,
+    "human_criteria": {
+      "a1": 4,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 4
+    },
+    "note": "",
+    "label_source": "claude-draft"
   },
   {
     "answer_id": "s04",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nSort Temperature in ascending order\n\nleft = 1\nright = n\n\nWhile left <= right\n    mid = (left + right) / 2\n\n    If Temperature[mid] >= 38\n        right = mid - 1\n    Else\n        left = mid + 1\n    End If\nEnd While\n\nOutput Temperature[left...n]\n\nคำอธิบาย :\nทำการเรียงข้อมูลอุณหภูมิจากน้อยไปมากก่อน แล้วใช้ Binary Search เพื่อค้นหาตำแหน่งแรกที่มีอุณหภูมิตั้งแต่ 38 องศาขึ้นไป เมื่อพบตำแหน่งดังกล่าว คนที่อยู่หลังตำแหน่งนั้นจะเป็นกลุ่มที่มีอุณหภูมิสูงตามเกณฑ์\n\nวิเคราะห์ประสิทธิภาพ :\nBinary Search มีเวลาในการค้นหา O(log n) แต่การเรียงข้อมูลก่อนหน้าใช้เวลา O(n log n) ดังนั้นหากเริ่มต้นจากข้อมูลที่ยังไม่เรียงลำดับ จะไม่สามารถทำให้เวลารวมต่ำกว่า O(n) ได้",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 11,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "นับเวลา sort ด้วย = O(n log n) เข้ากฎเพดาน"
   },
   {
     "answer_id": "s05",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nParallel Find Maximum Temperature\n\nIf Maximum >= 38\n    Output \"พบผู้ป่วยที่มีความเสี่ยง\"\nElse\n    Output \"ไม่พบผู้ป่วยที่มีความเสี่ยง\"\nEnd If\n\nคำอธิบาย :\nให้อุปกรณ์ประมวลผลอุณหภูมิของคนทั้งหมดพร้อมกัน จากนั้นนำอุณหภูมิมาเปรียบเทียบเพื่อหาค่าที่มากที่สุด หากค่าอุณหภูมิสูงสุดมากกว่าหรือเท่ากับ 38 องศา แสดงว่ามีคนอย่างน้อยหนึ่งคนที่อยู่ในกลุ่มเสี่ยง\n\nวิเคราะห์ประสิทธิภาพ :\nใช้การเปรียบเทียบแบบขนานและรวมผลแบบต้นไม้ (Tree Reduction) ทำให้ใช้เวลา O(log n)",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 15.5,
+    "human_criteria": {
+      "a1": 4,
+      "a2": 3,
+      "a3": 1.5,
+      "c1": 1,
+      "c2": 2,
+      "c3": 4
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "ไม่ระบุจำนวน processor จึงให้ c2 ไม่เกิน 2; Pseudocode 'Parallel Find Maximum' ข้ามรายละเอียด a3 = 1.5; บอกได้แค่ว่ามีผู้ป่วยหรือไม่"
   },
   {
     "answer_id": "s06",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nSet Threshold = 38\n\nFor i = 1 to n step 4\n    Compare Temperature[i...i+3] with Threshold\n\n    If any Temperature >= 38\n        Mark as High Risk\n    Else\n        Mark as Normal\n    End If\nEnd For\n\nOutput Result\n\nคำอธิบาย :\nใช้คำสั่งเดียวในการเปรียบเทียบอุณหภูมิ 4 คนพร้อมกัน ทำให้ไม่จำเป็นต้องตรวจสอบทีละคนเหมือนการใช้ Loop ปกติ เมื่อเปรียบเทียบเสร็จแล้วจะแสดงผลว่าคนใดมีอุณหภูมิสูง\n\nวิเคราะห์ประสิทธิภาพ :\nเนื่องจากเปรียบเทียบได้ครั้งละ 4 คน จึงใช้เวลาประมาณ O(n/4) ทำให้มีประสิทธิภาพมากขึ้นกว่าการตรวจสอบทีละคน",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 9,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 2,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "SIMD ครั้งละ 4 คน (คงที่) = O(n) เข้ากฎเพดาน; c2 = 2 เพราะไม่สรุปว่า n/4 ยังเป็น O(n)"
   },
   {
     "answer_id": "s07",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nleft = 1\nright = n\n\nWhile left <= right\n    mid = (left + right) / 2\n\n    If Temperature[mid] >= 38\n        Output \"High Risk\"\n        right = mid - 1\n    Else\n        left = mid + 1\n    End If\nEnd While\n\nคำอธิบาย :\nใช้ Binary Search โดยตรวจสอบอุณหภูมิที่ตำแหน่งตรงกลางก่อน หากพบว่ามีอุณหภูมิสูงกว่าหรือเท่ากับ 38 ก็จะค้นหาทางด้านซ้ายต่อ แต่ถ้าอุณหภูมิต่ำกว่า 38 ก็จะค้นหาทางด้านขวา\n\nวิเคราะห์ประสิทธิภาพ :\nในแต่ละรอบจะลดจำนวนข้อมูลลงครึ่งหนึ่ง ทำให้มีเวลาในการทำงาน O(log n) ซึ่งรวดเร็วกว่า O(n)",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 17,
+    "human_criteria": {
+      "a1": 2,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 4
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "binary search แต่ไม่ระบุว่าข้อมูลต้องเรียงแล้ว จึงให้ a1 = 2"
   },
   {
     "answer_id": "s08",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nFor i = 1 to n\n    If Temperature[i] >= 38\n        Output \"Covid Risk\"\n    Else\n        Output \"Normal\"\n    End If\nEnd For\n\nคำอธิบาย :\nรับค่า n เพื่อเก็บจำนวนคนที่เดินผ่านกล้อง จากนั้นใช้ For Loop เพื่อตรวจสอบอุณหภูมิของแต่ละคน ถ้าอุณหภูมิมากกว่าหรือเท่ากับ 38 จะถือว่าเป็นผู้ป่วยที่มีความเสี่ยง แต่ถ้าไม่ถึงจะถือว่าเป็นคนปกติ\n\nวิเคราะห์ประสิทธิภาพ :\nมีการวนลูปทั้งหมด n รอบ ดังนั้นมี Time Complexity เท่ากับ O(n) ซึ่งไม่ตรงกับข้อกำหนดที่ต้องการให้ใช้เวลาน้อยกว่า O(n)",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 12,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 3,
+      "a3": 3,
+      "c1": 2,
+      "c2": 4,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "นิยาม n ชัดเจน c1 = 2"
   },
   {
     "answer_id": "s09",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nSort Temperature in descending order\n\nFor i = 1 to n\n    If Temperature[i] >= 38\n        Output \"High Risk\"\n    Else\n        Break\n    End If\nEnd For\n\nคำอธิบาย :\nเรียงค่าอุณหภูมิจากมากไปน้อยก่อน เพื่อให้คนที่มีอุณหภูมิสูงอยู่ด้านหน้าของข้อมูล จากนั้นตรวจสอบตั้งแต่คนแรกไปเรื่อย ๆ หากเจออุณหภูมิต่ำกว่า 38 ก็หยุดการทำงานได้เลย เพราะข้อมูลที่เหลือจะต่ำกว่าด้วย\n\nวิเคราะห์ประสิทธิภาพ :\nการเรียงลำดับข้อมูลต้องใช้เวลา O(n log n) และการตรวจสอบใช้เวลา O(n) ดังนั้นความซับซ้อนโดยรวมคือ O(n log n)",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 11,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft"
   },
   {
     "answer_id": "s10",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nFor i = 1 to n\n    For j = 1 to n\n        If Temperature[i] >= 38\n            If Temperature[j] >= 38\n                Output \"High Risk\"\n            End If\n        End If\n    End For\nEnd For\n\nคำอธิบาย :\nใช้ Loop 2 ชั้นเพื่อให้อุณหภูมิของคนแต่ละคนถูกตรวจสอบซ้ำกับทุกคน ทำให้สามารถตรวจหาผู้ป่วยได้อย่างละเอียดและไม่พลาดคนที่มีอุณหภูมิสูง\n\nวิเคราะห์ประสิทธิภาพ :\nมี Loop 2 ชั้น โดยแต่ละชั้นทำงาน n รอบ ดังนั้นจึงมีความซับซ้อน O(n²)",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 11,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft"
   },
   {
     "answer_id": "s11",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nSum = 0\n\nFor i = 1 to n\n    Sum = Sum + Temperature[i]\nEnd For\n\nAverage = Sum / n\n\nIf Average >= 38\n    Output \"Covid\"\nElse\n    Output \"Normal\"\nEnd If\n\nคำอธิบาย :\nนำอุณหภูมิของทุกคนมารวมกันแล้วหารด้วยจำนวนคนเพื่อหาค่าเฉลี่ย หากอุณหภูมิเฉลี่ยมากกว่าหรือเท่ากับ 38 จะถือว่ามีผู้ป่วยอยู่ในกลุ่ม แต่ถ้าต่ำกว่านั้นจะถือว่าไม่มีผู้ป่วย\n\nวิเคราะห์ประสิทธิภาพ :\nใช้ For Loop จำนวน n รอบ จึงมี Time Complexity เท่ากับ O(n) และยังไม่สามารถบอกได้ว่าคนใดมีอุณหภูมิสูง เพราะใช้เพียงค่าเฉลี่ยของคนทั้งหมด",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 9.5,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 1.5,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "ใช้ค่าเฉลี่ยแทนรายคน a1 = 0; a2 = 1.5 เพราะมี threshold แต่วิธีเปรียบเทียบผิด"
   },
   {
     "answer_id": "s12",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nMap:\n    Parallel For each person\n        If Temperature >= 38\n            Result = 1\n        Else\n            Result = 0\n        End If\n\nReduce:\n    Sum all Result\n\nOutput High Risk Person Count\nOutput High Risk Person Details\n\nคำอธิบาย :\nแบ่งข้อมูลให้แต่ละ Processor รับผิดชอบตรวจสอบอุณหภูมิของคนแต่ละส่วน โดยใช้ Map ในการตรวจสอบว่าคนใดมีอุณหภูมิเกินเกณฑ์ และใช้ Reduce ในการรวมจำนวนคนที่มีอุณหภูมิสูงเข้าด้วยกัน\n\nวิเคราะห์ประสิทธิภาพ :\nถ้ามี Processor จำนวน p ตัว แต่ละตัวจะตรวจสอบประมาณ n/p คน และใช้เวลา O(log p) ในการรวมผลแบบขนาน ดังนั้นเวลารวมคือ O(n/p + log p) ถ้ามี Processor จำนวนมากเพียงพอ ก็จะใช้เวลาน้อยกว่า O(n) ได้",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 19,
+    "human_criteria": {
+      "a1": 4,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 4
+    },
+    "note": "",
+    "label_source": "claude-draft"
   },
   {
     "answer_id": "s13",
     "answer_text": "Pseudocode :\nFunction FindCovid(Temperature, n)\n\n    If n = 1\n        If Temperature[1] >= 38\n            Return \"High Risk\"\n        Else\n            Return \"Normal\"\n        End If\n    End If\n\n    mid = n / 2\n\n    FindCovid(Temperature[1...mid], mid)\n\nEnd Function\n\nคำอธิบาย :\nแบ่งข้อมูลทั้งหมดออกเป็น 2 ส่วน และจะเลือกตรวจสอบข้อมูลเพียงครึ่งแรกก่อน จากนั้นแบ่งครึ่งข้อมูลไปเรื่อย ๆ จนเหลือคนเพียง 1 คน แล้วตรวจสอบอุณหภูมิว่ามากกว่า 38 หรือไม่\n\nวิเคราะห์ประสิทธิภาพ :\nทุกครั้งที่ทำงานจะลดข้อมูลลงครึ่งหนึ่ง จึงมี Time Complexity เป็น O(log n)",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 15,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 4
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "ตรวจแค่ครึ่งแรก (หาผู้ป่วยไม่ถูก) a1 = 0; c3 = 4 ตาม RULES ตรงตัวเพราะ O(log n) ถูกตามอัลกอริทึมที่เขียน อาจารย์อาจให้ 0"
   },
   {
     "answer_id": "s14",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nFor i = 1 to n\n    If Temperature[i] >= 38\n        Output \"Found High Risk\"\n        Output i\n        Stop\n    End If\nEnd For\n\nOutput \"Not Found\"\n\nคำอธิบาย :\nใช้การตรวจสอบจากคนแรกไปเรื่อย ๆ หากพบคนที่มีอุณหภูมิมากกว่าหรือเท่ากับ 38 ก็จะแสดงผลและหยุดการทำงานทันที เพื่อไม่ให้เสียเวลาในการตรวจสอบคนที่เหลือ\n\nวิเคราะห์ประสิทธิภาพ :\nกรณีที่พบผู้ป่วยคนแรกจะใช้เวลา O(1) แต่กรณีที่ไม่มีผู้ป่วยหรือต้องตรวจสอบจนถึงคนสุดท้ายจะใช้เวลา O(n)",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 11,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft"
   },
   {
     "answer_id": "s15",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nHighRiskCount = 0\n\nFor i = 1 to n\n    If Temperature[i] >= 38\n        HighRiskCount = HighRiskCount + 1\n    End If\nEnd For\n\nOutput HighRiskCount\n\nคำอธิบาย :\nใช้ตัวแปร HighRiskCount เพื่อเก็บจำนวนผู้ที่มีอุณหภูมิสูงกว่าเกณฑ์ โดยตรวจสอบอุณหภูมิของทุกคน ถ้าผ่านเงื่อนไขก็เพิ่มจำนวนขึ้น 1 และสุดท้ายแสดงจำนวนคนที่มีความเสี่ยง\n\nวิเคราะห์ประสิทธิภาพ :\nการทำงานของ For Loop เท่ากับ n รอบ จึงมีความซับซ้อน O(n) ซึ่งไม่ตรงกับที่โจทย์กำหนด",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 11,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft"
   },
   {
     "answer_id": "s16",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nDivide data into groups\n\nFor each group\n    GroupMax = Maximum Temperature in group\n\n    If GroupMax < 38\n        Skip this group\n    Else\n        Check each person in this group\n    End If\nEnd For\n\nOutput Result\n\nคำอธิบาย :\nแบ่งคนออกเป็นหลายกลุ่ม จากนั้นหาค่าอุณหภูมิสูงที่สุดของแต่ละกลุ่ม ถ้าค่าสูงสุดของกลุ่มยังต่ำกว่า 38 แสดงว่าคนทั้งหมดในกลุ่มนั้นมีอุณหภูมิต่ำกว่า 38 จึงไม่ต้องตรวจสอบต่อ แต่ถ้าค่าสูงสุดมากกว่าหรือเท่ากับ 38 จะตรวจสอบคนในกลุ่มนั้นเพิ่มเติม\n\nวิเคราะห์ประสิทธิภาพ :\nช่วยลดจำนวนข้อมูลที่ต้องตรวจสอบในกรณีที่มีหลายกลุ่มที่ไม่มีคนอุณหภูมิสูง แต่ถ้าทุกกลุ่มมีคนอุณหภูมิสูงก็ยังต้องตรวจสอบทุกคน ทำให้กรณีแย่ที่สุดเป็น O(n)",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 7.5,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 3,
+      "a3": 1.5,
+      "c1": 1,
+      "c2": 2,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "กรณีแย่ที่สุด O(n) เข้ากฎเพดาน; ขั้นตอนแบ่งกลุ่มไม่ชัด a3 = 1.5; c2 = 2"
   },
   {
     "answer_id": "s17",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nSet Threshold = 38\n\nParallel Comparator:\n    For every person i\n        Compare Temperature[i] with Threshold\n        If Temperature[i] >= Threshold\n            Flag[i] = 1\n        Else\n            Flag[i] = 0\n\nOutput Flag[1...n]\n\nคำอธิบาย :\nกล้องจะส่งอุณหภูมิของทุกคนไปยังวงจรเปรียบเทียบที่ทำงานพร้อมกัน แต่ละวงจรจะรับผิดชอบตรวจสอบอุณหภูมิของคนหนึ่งคน หากอุณหภูมิถึงเกณฑ์ก็จะส่งค่า Flag เป็น 1 ถ้าไม่ถึงเกณฑ์จะส่งค่า 0\n\nวิเคราะห์ประสิทธิภาพ :\nเนื่องจากทุกวงจรทำงานพร้อมกันจึงใช้เวลา O(1) ในการเปรียบเทียบ และได้ผลลัพธ์ครบทุกคน โดยใช้วงจรเปรียบเทียบจำนวน n ชุด",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 19,
+    "human_criteria": {
+      "a1": 4,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 4
+    },
+    "note": "",
+    "label_source": "claude-draft"
   },
   {
     "answer_id": "s18",
     "answer_text": "Pseudocode :\nInput n\nInput All Temperature\n\nIf All Temperature >= 38\n    Output \"Covid\"\nElse\n    Output \"Normal\"\nEnd If\n\nคำอธิบาย :\nกล้องสามารถวัดอุณหภูมิของคนได้หลายคนพร้อมกันอยู่แล้ว จึงสามารถรับข้อมูลทั้งหมดได้ในครั้งเดียว และใช้คำสั่ง If ตรวจสอบว่ามีอุณหภูมิถึงเกณฑ์หรือไม่ ทำให้ไม่ต้องใช้ Loop\n\nวิเคราะห์ประสิทธิภาพ :\nใช้คำสั่งเพียงครั้งเดียว จึงคิดว่าเป็น O(1) เพราะไม่ต้องวนลูปตรวจสอบข้อมูล",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 5.5,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 3,
+      "a3": 1.5,
+      "c1": 1,
+      "c2": 0,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "'If All Temperature >= 38' ไม่ระบุ hardware ขนาน = O(n); c2 = 0 เพราะเขียนแค่คำตอบ"
   },
   {
     "answer_id": "s19",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nSend Temperature to GPU\n\nParallel:\n    Compare each Temperature with 38\n\nIf Temperature >= 38\n    Output \"High Risk\"\nElse\n    Output \"Normal\"\nEnd If\n\nคำอธิบาย :\nส่งข้อมูลอุณหภูมิจากกล้องไปยัง GPU ซึ่งสามารถประมวลผลข้อมูลหลายชุดพร้อมกันได้ จากนั้นเปรียบเทียบค่าของทุกคนกับ 38 องศา และแสดงผลลัพธ์ว่าเป็นกลุ่มเสี่ยงหรือกลุ่มปกติ\n\nวิเคราะห์ประสิทธิภาพ :\nเนื่องจาก GPU สามารถทำงานพร้อมกันได้หลายชุด จึงสามารถทำให้การประมวลผลใช้เวลา O(log n) และเร็วกว่าการทำงานแบบปกติ",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 11.5,
+    "human_criteria": {
+      "a1": 4,
+      "a2": 3,
+      "a3": 1.5,
+      "c1": 1,
+      "c2": 2,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "อ้าง O(log n) จาก GPU แต่ไม่บอกจำนวน processor c2 = 2; Big-O ไม่ตรงกับอัลกอริทึมที่เขียน (ไม่มีการรวมผล) c3 = 0"
   },
   {
     "answer_id": "s20",
     "answer_text": "Pseudocode :\nInput n\nInput Temperature[1...n]\n\nBuild MaxHeap(Temperature)\n\nWhile Heap is not Empty\n    person = ExtractMax(Heap)\n\n    If person.Temperature >= 38\n        Output \"High Risk\"\n    Else\n        Break\n    End If\nEnd While\n\nคำอธิบาย :\nนำข้อมูลอุณหภูมิทั้งหมดมาสร้าง Max Heap เพื่อให้คนที่มีอุณหภูมิสูงที่สุดอยู่ด้านบนสุด จากนั้นนำข้อมูลออกมาตรวจสอบทีละคน ถ้าอุณหภูมิยังมากกว่าหรือเท่ากับ 38 ก็แสดงว่าเป็นกลุ่มเสี่ยง แต่หากต่ำกว่า 38 ก็สามารถหยุดได้เพราะคนที่เหลือจะมีอุณหภูมิต่ำกว่า\n\nวิเคราะห์ประสิทธิภาพ :\nการสร้าง Max Heap ใช้เวลา O(n) และการนำข้อมูลออกจาก Heap ใช้เวลา O(log n) ต่อครั้ง ดังนั้นถ้ามีคนที่มีความเสี่ยงหลายคนก็อาจใช้เวลา O(n log n)",
-    "human_score": null,
-    "human_criteria": null,
-    "note": ""
+    "human_score": 11,
+    "human_criteria": {
+      "a1": 0,
+      "a2": 3,
+      "a3": 3,
+      "c1": 1,
+      "c2": 4,
+      "c3": 0
+    },
+    "note": "",
+    "label_source": "claude-draft",
+    "label_note": "นับเวลาสร้าง heap O(n) เข้ากฎเพดาน"
   }
 ]
